@@ -3,7 +3,7 @@ class CreateReservations < ActiveRecord::Migration
     create_table :reservations do |t|
       t.date :start_date
       t.date :end_date
-      t.belongs_to :user
+      t.belongs_to :visitor
 
       t.timestamps
     end

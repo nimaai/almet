@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require sass-bootstrap/dist/js/bootstrap
-//= require sass-bootstrap/dist/js/bootstrap.min
