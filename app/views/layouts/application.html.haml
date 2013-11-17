@@ -1,0 +1,28 @@
+!!! 5
+
+%html
+
+  %head
+
+    %title= "Almet"
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    = yield :head
+
+  %body
+    %nav.navbar.navbar-default{role: "navigation"}
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a{href: "#"}
+              Reservations
+          %li
+            %a{href: "#"}
+              Customers
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{href: "#"}
+              Login
+
+    = yield
