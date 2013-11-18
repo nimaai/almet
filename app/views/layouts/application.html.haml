@@ -11,26 +11,27 @@
     = yield :head
 
   %body
-    %nav.navbar.navbar-default{role: "navigation"}
-      .collapse.navbar-collapse
-        %ul.nav.navbar-nav
-          %li.dropdown
-            %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"}
-              Reservations
-              %b.caret
-            %ul.dropdown-menu{role: "menu"}
-              %li
-                %a{href: new_reservation_path}
-                  New reservation
-              %li
-                %a{href: "#"}
-                  Closed reservations
-          %li
-            %a{href: "#"}
-              Customers
-        %ul.nav.navbar-nav.navbar-right
-          %li
-            %a{href: "#"}
-              Login
+    .container
+      %nav.navbar.navbar-default{role: "navigation"}
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"}
+                Reservations
+                %b.caret
+              %ul.dropdown-menu{role: "menu"}
+                %li
+                  %a{href: new_reservation_path}
+                    New reservation
+                %li
+                  %a{href: "#"}
+                    Closed reservations
+            %li
+              %a{href: "#"}
+                Customers
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a{href: "#"}
+                Login
 
-    = yield
+      = yield
