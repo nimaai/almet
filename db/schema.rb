@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 20131025210541) do
   create_table "reservations", force: true do |t|
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "user_id"
+    t.integer  "visitor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "visitors", force: true do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.string   "street"
