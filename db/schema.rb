@@ -14,8 +14,9 @@
 ActiveRecord::Schema.define(version: 20131025210541) do
 
   create_table "reservations", force: true do |t|
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "arrival"
+    t.date     "departure"
+    t.integer  "guests"
     t.integer  "visitor_id"
     t.datetime "created_at"
     t.datetime "updated_at"

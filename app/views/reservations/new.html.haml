@@ -1,6 +1,37 @@
-%form.form-horizontal{role: "form"}
-  .form-group
-    %label.col-sm-1.control-label{for: "#start-date"}
-      Start date
-    .col-sm-10
-      %input#start-date.form-control{type: :date, placeholder: "Enter start date"}
+= form_for :reservation, url: reservations_path, html: {role: "form"} do |reservation_form|
+
+  .form-inline
+
+    .form-group
+      %label.control-label{for: "#arrival"}
+        Arrival
+      = reservation_form.date_field :arrival, class: "form-control", placeholder: "Enter arrival date"
+
+    .form-group
+      %label.control-label{for: "#arrival"}
+        Departure
+      = reservation_form.date_field :departure, class: "form-control", placeholder: "Enter departure date"
+
+    .form-group
+      %label.control-label{for: "#arrival"}
+        Number of visitors
+      = reservation_form.number_field :guests, class: "form-control"
+
+  = reservation_form.fields_for :visitor do |visitor_fields|
+
+    .form-inline.top-buffer
+
+      .form-group
+        %label.control-label{for: "#firstname"}
+          Firstname
+        = visitor_fields.text_field :firstname, class: "form-control", placeholder: "Enter firstname"
+
+      .form-group
+        %label.control-label{for: "#lastname"}
+          Lastname
+        = visitor_fields.text_field :lastname, class: "form-control", placeholder: "Enter lastname"
+
+  .form-inline
+
+    .form-group.top-buffer
+      = reservation_form.button

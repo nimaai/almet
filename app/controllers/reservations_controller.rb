@@ -1,8 +1,7 @@
 class ReservationsController < ApplicationController
-  def index
+
+  def create
+    binding.pry
   end
 
-  def new
-    @reservation = Reservation.new params[:reservation]
-  end
 end

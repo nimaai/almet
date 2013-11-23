@@ -11,8 +11,12 @@
     = yield :head
 
   %body
-    .container
-      %nav.navbar.navbar-default{role: "navigation"}
+    %nav.navbar.navbar-default{role: "navigation"}
+      .container
+        .navbar-header
+          .navbar-brand
+            %b
+              Almet
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li.dropdown
@@ -34,4 +38,4 @@
               %a{href: "#"}
                 Login
 
-      = yield
+    .container= yield
