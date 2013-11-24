@@ -34,6 +34,8 @@ end
 
 gem 'pry', '~> 0.9.12.2', group: [:development, :test]
 
+gem "pry-rails", "~> 0.3.2", group: [:development, :test]
+
 gem "haml", "~> 4.0.4"
 
 # Use ActiveModel has_secure_password

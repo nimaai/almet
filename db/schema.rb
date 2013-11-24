@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131025210541) do
     t.string   "street"
     t.string   "zip"
     t.string   "city"
+    t.string   "country"
     t.string   "phone"
     t.string   "mobile"
     t.string   "email"

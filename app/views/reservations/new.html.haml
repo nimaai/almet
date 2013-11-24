@@ -12,9 +12,9 @@
 
     .form-group
       = reservation_form.label :guests, "Number of guests", class: "control-label"
-      = reservation_form.number_field :guests, class: "form-control"
+      = reservation_form.number_field :guests, value: 1, min: 1, class: "form-control"
 
-  = reservation_form.fields_for :visitor do |visitor_fields|
+  = reservation_form.fields_for :visitor_attributes do |visitor_fields|
 
     .form-inline.top-buffer
 
@@ -35,6 +35,10 @@
       .form-group
         = reservation_form.label :zip, class: "control-label"
         = visitor_fields.text_field :zip, class: "form-control"
+
+      .form-group
+        = reservation_form.label :city, class: "control-label"
+        = visitor_fields.text_field :city, class: "form-control"
 
       .form-group
         = reservation_form.label :country, class: "control-label"
