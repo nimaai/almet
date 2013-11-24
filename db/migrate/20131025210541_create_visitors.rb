@@ -6,6 +6,7 @@ class CreateVisitors < ActiveRecord::Migration
       t.string :street
       t.string :zip
       t.string :city
+      t.string :country
       t.string :phone
       t.string :mobile
       t.string :email

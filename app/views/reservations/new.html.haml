@@ -3,18 +3,15 @@
   .form-inline
 
     .form-group
-      %label.control-label{for: "#arrival"}
-        Arrival
+      = reservation_form.label :arrival, class: "control-label"
       = reservation_form.date_field :arrival, class: "form-control", placeholder: "Enter arrival date"
 
     .form-group
-      %label.control-label{for: "#arrival"}
-        Departure
+      = reservation_form.label :departure, class: "control-label"
       = reservation_form.date_field :departure, class: "form-control", placeholder: "Enter departure date"
 
     .form-group
-      %label.control-label{for: "#arrival"}
-        Number of visitors
+      = reservation_form.label :guests, "Number of guests", class: "control-label"
       = reservation_form.number_field :guests, class: "form-control"
 
   = reservation_form.fields_for :visitor do |visitor_fields|
@@ -22,14 +19,40 @@
     .form-inline.top-buffer
 
       .form-group
-        %label.control-label{for: "#firstname"}
-          Firstname
+        = reservation_form.label :firstname, class: "control-label"
         = visitor_fields.text_field :firstname, class: "form-control", placeholder: "Enter firstname"
 
       .form-group
-        %label.control-label{for: "#lastname"}
-          Lastname
+        = reservation_form.label :lastname, class: "control-label"
         = visitor_fields.text_field :lastname, class: "form-control", placeholder: "Enter lastname"
+
+    .form-inline.top-buffer
+
+      .form-group
+        = reservation_form.label :street, class: "control-label"
+        = visitor_fields.text_field :street, class: "form-control"
+
+      .form-group
+        = reservation_form.label :zip, class: "control-label"
+        = visitor_fields.text_field :zip, class: "form-control"
+
+      .form-group
+        = reservation_form.label :country, class: "control-label"
+        = visitor_fields.text_field :country, class: "form-control"
+
+    .form-inline.top-buffer
+
+      .form-group
+        = reservation_form.label :mobile, class: "control-label"
+        = visitor_fields.phone_field :mobile, class: "form-control"
+
+      .form-group
+        = reservation_form.label :phone, class: "control-label"
+        = visitor_fields.phone_field :phone, class: "form-control"
+
+      .form-group
+        = reservation_form.label :email, class: "control-label"
+        = visitor_fields.email_field :email, class: "form-control"
 
   .form-inline
 
