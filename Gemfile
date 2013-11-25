@@ -38,6 +38,8 @@ gem "pry-rails", "~> 0.3.2", group: [:development, :test]
 
 gem "haml", "~> 4.0.4"
 
+gem "slim", "~> 2.0.2"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
