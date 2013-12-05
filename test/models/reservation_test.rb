@@ -2,6 +2,12 @@ require 'test_helper.rb'
 
 class ReservationTest < ActiveSupport::TestCase
 
+  def setup
+    @reservation_attrs = { arrival:            Date.today.to_s,
+                           departure:          Date.tomorrow.to_s,
+                           guests:             2 }
+  end
+
   test "creation of a new reservation and a new visitor" do
 
     visitor_attrs = { firstname:    "FirstnameX",
@@ -14,12 +20,7 @@ class ReservationTest < ActiveSupport::TestCase
                       phone:        "0411234567",
                       email:        "email@email.com" }
 
-    reservation_attrs = { arrival:            Date.today.to_s,
-                          departure:          Date.tomorrow.to_s,
-                          guests:             2,
-                          visitor_attributes: visitor_attrs }
-
-    r = Reservation.new reservation_attrs
+    r = Reservation.new @reservation_attrs.merge(visitor_attributes: visitor_attrs)
     assert r.save
     assert r.persisted?
     assert r.visitor
