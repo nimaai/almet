@@ -1,0 +1,5 @@
+reservation1:
+  arrival:      <%= (Date.today + 5.days).to_s %>
+  departure:    <%= (Date.today + 7.days).to_s %>
+  guests:       1
+  visitor:      user1

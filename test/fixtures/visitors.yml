@@ -1,0 +1,10 @@
+user1:
+  firstname:    "User1"
+  lastname:     "Lastname1"
+  street:       "Street1 13"
+  zip:          "Zip1"
+  city:         "City1"
+  country:      "Country1"
+  mobile:       "0904123456"
+  phone:        "0411234567"
+  email:        "user1@email.com"
