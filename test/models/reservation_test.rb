@@ -38,13 +38,14 @@ class ReservationTest < ActiveSupport::TestCase
 
   end
 
-  #test "validation of conflicting date range" do
+  test "validation of conflicting date range" do
 
-    #r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
 
-    #assert_not r.save
-    #assert_not r.persisted?
+    assert_not r.save
+    assert_not r.persisted?
+    assert_not r.visitor.persisted?
 
-  #end
+  end
 
 end
