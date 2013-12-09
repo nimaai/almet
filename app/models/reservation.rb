@@ -7,7 +7,11 @@ class Reservation < ActiveRecord::Base
   validates_presence_of :arrival, :departure, :guests
 
   validate do
-    errors.add(:base, "Requested reservation is conflicting with some other reservation") if Reservation.all.any? {|r| r.arrival.between? self.arrival, self.departure or r.departure.between? self.arrival, self.departure }
+    errors.add(:base, "Requested reservation is conflicting with some other reservation") if Reservation.all.any? {|r| conflicts? r }
+  end
+
+  def conflicts?(other)
+    departure > other.arrival and arrival < other.departure
   end
 
 end

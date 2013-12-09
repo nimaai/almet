@@ -41,10 +41,43 @@ class ReservationTest < ActiveSupport::TestCase
   test "validation of conflicting date range" do
 
     r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
-
     assert_not r.save
+
+    r = Reservation.new arrival: Date.today + 5.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 7.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 8.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
     assert_not r.persisted?
     assert_not r.visitor.persisted?
+
+  end
+
+  test "validation of non conflicting date range 1" do
+
+    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 5.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert r.save
+    assert r.persisted?
+    assert r.visitor.persisted?
+
+  end
+
+  test "validation of non conflicting date range 2" do
+
+    r = Reservation.new arrival: Date.today + 8.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert r.save
+    assert r.persisted?
+    assert r.visitor.persisted?
 
   end
 
