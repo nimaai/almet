@@ -38,14 +38,16 @@ class ReservationTest < ActiveSupport::TestCase
 
   end
 
-  test "validation of conflicting date range" do
-
 =begin
-A = arrival of existing reservation
-B = departure of existing reservation
+A = arrival of 1st reservation
+B = departure of 1st reservation
+E = arrival of 2nd reservation
+F = departure of 2nd reservation
 C = arrival of the new reservation
 D = departure of the new reservation
 =end
+
+  test "validation of conflicting date range with one reservation" do
 
     # -.-A-.-.-B-.-
     # -C-.-D-.-.-.-
@@ -104,4 +106,25 @@ D = departure of the new reservation
 
   end
 
+  test "validation of conflicting date range with two reservation" do
+
+    # -.-A-.-.-B-.-.-E-.-.-F-.-
+    # -.-.-.-C-.-.-.-.-D-.-.-.-
+    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    # -.-A-.-.-B-.-.-E-.-.-F-.-
+    # -C-.-.-.-.-.-.-.-D-.-.-.-
+    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    # -.-A-.-.-B-.-.-E-.-.-F-.-
+    # -C-.-.-.-.-.-.-.-.-.-.-D-
+    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, guests: 1, visitor_attributes: @visitor_attrs
+    assert_not r.save
+
+    assert_not r.persisted?
+    assert_not r.visitor.persisted?
+
+  end
 end

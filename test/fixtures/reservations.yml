@@ -3,3 +3,9 @@ reservation1:
   departure:    <%= Date.today + 8.days %>
   guests:       1
   visitor:      user1
+
+reservation2:
+  arrival:      <%= Date.today + 11.days %>
+  departure:    <%= Date.today + 14.days %>
+  guests:       1
+  visitor:      user1
