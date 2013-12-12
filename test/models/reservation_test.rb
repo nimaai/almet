@@ -40,21 +40,40 @@ class ReservationTest < ActiveSupport::TestCase
 
   test "validation of conflicting date range" do
 
+=begin
+A = arrival of existing reservation
+B = departure of existing reservation
+C = arrival of the new reservation
+D = departure of the new reservation
+=end
+
+    # -.-A-.-.-B-.-
+    # -C-.-D-.-.-.-
     r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
     assert_not r.save
 
+    # -.-A-.-.-B-.-
+    # -.-C-D-.-.-.-
     r = Reservation.new arrival: Date.today + 5.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
     assert_not r.save
 
+    # -.-A-.-.-B-.-
+    # -.-.-C-D-.-.-
     r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 7.days, guests: 1, visitor_attributes: @visitor_attrs
     assert_not r.save
 
+    # -.-A-.-.-B-.-
+    # -.-.-C-.-D-.-
     r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 8.days, guests: 1, visitor_attributes: @visitor_attrs
     assert_not r.save
 
+    # -.-A-.-.-B-.-
+    # -.-.-C-.-.-D-
     r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
     assert_not r.save
 
+    # -.-A-.-.-B-.-
+    # -C-.-.-.-.-D-
     r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
     assert_not r.save
 
@@ -65,6 +84,8 @@ class ReservationTest < ActiveSupport::TestCase
 
   test "validation of non conflicting date range 1" do
 
+    # -.-A-.-.-B-.-
+    # -C-D-.-.-.-.-
     r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 5.days, guests: 1, visitor_attributes: @visitor_attrs
     assert r.save
     assert r.persisted?
@@ -74,6 +95,8 @@ class ReservationTest < ActiveSupport::TestCase
 
   test "validation of non conflicting date range 2" do
 
+    # -.-A-.-.-B-.-
+    # -.-.-.-.-C-D-
     r = Reservation.new arrival: Date.today + 8.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
     assert r.save
     assert r.persisted?
