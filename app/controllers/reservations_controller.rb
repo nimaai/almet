@@ -5,10 +5,10 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       flash[:notice] = "New reservation successfully created"
-      redirect_to root_path
+      redirect_to reservations_path
     else
       flash[:error] = @reservation.errors
-      redirect_to :back, flash[:error]
+      redirect_to :back
     end
   end
 
