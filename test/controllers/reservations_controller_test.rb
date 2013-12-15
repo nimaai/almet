@@ -25,4 +25,19 @@ class ReservationsControllerTest < ActionController::TestCase
 
   end
 
+  test "should get index of reservations" do
+
+    get :index
+
+    assert_response :success
+    assert_not_nil assigns(:reservations)
+
+    next_reservation = Reservation.order(:arrival).first
+    assert_equal assigns(:reservations).first, next_reservation
+
+    assert_template :index
+    assert_template layout: "layouts/application", partial: "_reservation"
+
+  end
+
 end
