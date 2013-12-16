@@ -38,6 +38,12 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_template :index
     assert_template layout: "layouts/application", partial: "_reservation"
 
+    assert_select "table tbody tr" do |lines|
+      lines.each_with_index do |line, i|
+        assert_select line, ":first-child", number: i + 1
+      end
+    end
+
   end
 
 end
