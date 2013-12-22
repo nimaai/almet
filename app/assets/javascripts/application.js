@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require sass-bootstrap/dist/js/bootstrap
+//= require bootstrap/dist/js/bootstrap
+//= require bootstrap-form-helpers/dist/js/bootstrap-formhelpers

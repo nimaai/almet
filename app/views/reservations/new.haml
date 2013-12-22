@@ -4,7 +4,11 @@
 
     .form-group
       = reservation_form.label :arrival, class: "control-label"
-      = reservation_form.date_field :arrival, class: "form-control", placeholder: "Enter arrival date"
+      .bfh-datepicker
+        .input-group.bfh-datepicker-toggle{:"data-toggle" => "bfh-datepicker"}
+          -#%span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+          = reservation_form.date_field :arrival, class: "form-control", placeholder: "Enter arrival date"
 
     .form-group
       = reservation_form.label :departure, class: "control-label"
