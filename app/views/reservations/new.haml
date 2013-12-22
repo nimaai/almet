@@ -4,15 +4,17 @@
 
     .form-group
       = reservation_form.label :arrival, class: "control-label"
-      .bfh-datepicker
+      .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => Date.today.strftime("%d.%m.%Y")}
         .input-group.bfh-datepicker-toggle{:"data-toggle" => "bfh-datepicker"}
-          -#%span.input-group-addon
           %span.glyphicon.glyphicon-calendar
-          = reservation_form.date_field :arrival, class: "form-control", placeholder: "Enter arrival date"
+          = reservation_form.date_field :arrival, class: "form-control"
 
     .form-group
       = reservation_form.label :departure, class: "control-label"
-      = reservation_form.date_field :departure, class: "form-control", placeholder: "Enter departure date"
+      .bfh-datepicker{:"data-format" => "d.m.y",:"data-date" => Date.tomorrow.strftime("%d.%m.%Y")}
+        .input-group.bfh-datepicker-toggle{:"data-toggle" => "bfh-datepicker"}
+          %span.glyphicon.glyphicon-calendar
+          = reservation_form.date_field :departure, class: "form-control"
 
     .form-group
       = reservation_form.label :guests, "Number of guests", class: "control-label"
