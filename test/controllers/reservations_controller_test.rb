@@ -50,7 +50,8 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_select "table thead th:nth-child(3)", "Departure"
     assert_select "table thead th:nth-child(4)", "Adults"
     assert_select "table thead th:nth-child(5)", "Children"
-    assert_select "table thead th:nth-child(6)", "Visitor"
+    assert_select "table thead th:nth-child(6)", "Bedclothes Service"
+    assert_select "table thead th:nth-child(7)", "Visitor"
 
     # test numbering of reservation lines starting with 1 and increasing & content of lines
     assert_select "table tbody tr" do |lines|
@@ -58,9 +59,10 @@ class ReservationsControllerTest < ActionController::TestCase
         assert_select line, "td:nth-child(1)", number: i + 1
         assert_select line, "td:nth-child(2)", reservations[i].arrival.to_s
         assert_select line, "td:nth-child(3)", reservations[i].departure.to_s
-        assert_select line, "td:nth-child(4)", reservations[i].adults
-        assert_select line, "td:nth-child(5)", reservations[i].children
-        assert_select line, "td:nth-child(6)", reservations[i].visitor.fullname
+        assert_select line, "td:nth-child(4)", reservations[i].adults.to_s
+        assert_select line, "td:nth-child(5)", reservations[i].children.to_s
+        assert_select line, "td:nth-child(6)", (reservations[i].bedclothes_service ? "Yes" : "No")
+        assert_select line, "td:nth-child(7)", reservations[i].visitor.fullname
       end
     end
 

@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223141824) do
+ActiveRecord::Schema.define(version: 20131223160925) do
 
   create_table "reservations", force: true do |t|
     t.date     "arrival"
     t.date     "departure"
-    t.integer  "adults"
+    t.integer  "adults",             default: 1
     t.integer  "visitor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "children"
-    t.boolean  "bedclothes_service"
+    t.integer  "children",           default: 0
+    t.boolean  "bedclothes_service", default: true
   end
 
   create_table "visitors", force: true do |t|
