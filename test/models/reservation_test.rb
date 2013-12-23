@@ -5,7 +5,8 @@ class ReservationTest < ActiveSupport::TestCase
   def setup
     @reservation_attrs = { arrival:            Date.today.to_s,
                            departure:          Date.tomorrow.to_s,
-                           guests:             2 }
+                           adults:             2,
+                           bedclothes_service: true }
 
     @visitor_attrs = { firstname:    "FirstnameX",
                        lastname:     "LastnameX",
@@ -42,32 +43,32 @@ class ReservationTest < ActiveSupport::TestCase
 
     # -.-*-.-.-*-.-
     # -*-.-*-.-.-.-
-    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-
     # -.-*-*-.-.-.-
-    r = Reservation.new arrival: Date.today + 5.days, departure: Date.today + 6.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 5.days, departure: Date.today + 6.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-
     # -.-.-*-*-.-.-
-    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 7.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 7.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-
     # -.-.-*-.-*-.-
-    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 8.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 8.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-
     # -.-.-*-.-.-*-
-    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 6.days, departure: Date.today + 9.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-
     # -*-.-.-.-.-*-
-    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 9.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     assert_not r.persisted?
@@ -79,7 +80,7 @@ class ReservationTest < ActiveSupport::TestCase
 
     # -.-*-.-.-*-.-
     # -*-*-.-.-.-.-
-    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 5.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 5.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert r.save
     assert r.persisted?
     assert r.visitor.persisted?
@@ -90,7 +91,7 @@ class ReservationTest < ActiveSupport::TestCase
 
     # -.-*-.-.-*-.-
     # -.-.-.-.-*-*-
-    r = Reservation.new arrival: Date.today + 8.days, departure: Date.today + 9.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 8.days, departure: Date.today + 9.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert r.save
     assert r.persisted?
     assert r.visitor.persisted?
@@ -101,22 +102,22 @@ class ReservationTest < ActiveSupport::TestCase
 
     # -.-*-.-.-*-.-.-*-.-.-*-.-
     # -.-.-.-*-.-.-.-.-*-.-.-.-
-    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-.-*-.-.-*-.-
     # -*-.-.-.-.-.-.-.-*-.-.-.-
-    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-.-.-*-.-.-*-.-.-*-.-
     # -*-.-.-.-.-.-.-.-.-.-.-*-
-    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 7.days, departure: Date.today + 12.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     # -.-*-*-*-.-
     # -.-.-*-*-.-
-    r = Reservation.new arrival: Date.today + 20.days, departure: Date.today + 21.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 20.days, departure: Date.today + 21.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert_not r.save
 
     assert_not r.persisted?
@@ -128,7 +129,7 @@ class ReservationTest < ActiveSupport::TestCase
 
     # -.-*-*-*-*-.-
     # -.-.-*-*-.-.-
-    r = Reservation.new arrival: Date.today + 18.days, departure: Date.today + 19.days, guests: 1, visitor_attributes: @visitor_attrs
+    r = Reservation.new arrival: Date.today + 18.days, departure: Date.today + 19.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     assert r.save
     assert r.persisted?
     assert r.visitor.persisted?

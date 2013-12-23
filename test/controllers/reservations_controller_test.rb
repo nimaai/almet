@@ -3,7 +3,8 @@ class ReservationsControllerTest < ActionController::TestCase
   def setup
     @reservation_attrs = { arrival:            Date.today.to_s,
                            departure:          Date.tomorrow.to_s,
-                           guests:             2 }
+                           adults:             2,
+                           bedclothes_service: true }
 
     @visitor_attrs = { firstname:    "FirstnameX",
                        lastname:     "LastnameX",
@@ -16,6 +17,8 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test "should create reservation" do
+
+    @request.env['HTTP_REFERER'] = new_reservation_path
 
     assert_difference "Reservation.count" do
       post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)

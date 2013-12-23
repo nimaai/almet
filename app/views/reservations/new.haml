@@ -17,8 +17,8 @@
           = reservation_form.date_field :departure, class: "form-control"
 
     .form-group
-      = reservation_form.label :guests, "Number of guests", class: "control-label"
-      = reservation_form.number_field :guests, value: 1, min: 1, class: "form-control"
+      = reservation_form.label :adults, "Number of adults", class: "control-label"
+      = reservation_form.number_field :adults, value: 1, min: 1, class: "form-control"
 
   = reservation_form.fields_for :visitor_attributes do |visitor_fields|
 
