@@ -35,15 +35,32 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:reservations)
 
+    # test order: next reservation should be first
     next_reservation = Reservation.order(:arrival).first
-    assert_equal assigns(:reservations).first, next_reservation
+    reservations = assigns(:reservations)
+    assert_equal reservations.first, next_reservation
 
+    # test partial
     assert_template :index
     assert_template layout: "layouts/application", partial: "_reservation"
 
+    # test availability of columns
+    assert_select "table thead th:nth-child(1)", "#"
+    assert_select "table thead th:nth-child(2)", "Arrival"
+    assert_select "table thead th:nth-child(3)", "Departure"
+    assert_select "table thead th:nth-child(4)", "Adults"
+    assert_select "table thead th:nth-child(5)", "Children"
+    assert_select "table thead th:nth-child(6)", "Visitor"
+
+    # test numbering of reservation lines starting with 1 and increasing & content of lines
     assert_select "table tbody tr" do |lines|
       lines.each_with_index do |line, i|
-        assert_select line, ":first-child", number: i + 1
+        assert_select line, "td:nth-child(1)", number: i + 1
+        assert_select line, "td:nth-child(2)", reservations[i].arrival.to_s
+        assert_select line, "td:nth-child(3)", reservations[i].departure.to_s
+        assert_select line, "td:nth-child(4)", reservations[i].adults
+        assert_select line, "td:nth-child(5)", reservations[i].children
+        assert_select line, "td:nth-child(6)", reservations[i].visitor.fullname
       end
     end
 
