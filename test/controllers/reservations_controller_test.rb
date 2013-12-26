@@ -22,6 +22,9 @@ class ReservationsControllerTest < ActionController::TestCase
       post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
 
+    assert_redirected_to reservations_path
+    assert_not_nil flash[:success]
+
   end
 
   test "should get index of reservations" do
