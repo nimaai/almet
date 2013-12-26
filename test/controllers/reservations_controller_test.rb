@@ -67,4 +67,10 @@ class ReservationsControllerTest < ActionController::TestCase
 
   end
 
+  test "past reservations" do
+    get :index, past: true
+    assert_template :index
+    assert_select "table tbody tr", Reservation.past.count
+  end
+
 end

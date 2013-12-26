@@ -26,10 +26,13 @@
               %ul.dropdown-menu{role: "menu"}
                 %li
                   %a{href: new_reservation_path}
-                    New reservation
+                    New
                 %li
                   %a{href: "#"}
-                    Closed reservations
+                    Future
+                %li
+                  %a{href: reservations_path(past: true)}
+                    Past
             %li
               %a{href: "#"}
                 Customers

@@ -1,7 +1,11 @@
 class ReservationsController < ApplicationController
 
   def index
-    @reservations = Reservation.order(:arrival)
+    @reservations = if params[:past]
+                      Reservation.past
+                    else
+                      Reservation.order(:arrival)
+                    end
   end
 
   def create

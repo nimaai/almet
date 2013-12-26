@@ -33,3 +33,27 @@ reservation5:
   children:     <%= rand(0..2) %>
   bedclothes_service: <%= [true, false].sample %>
   visitor:      user1
+
+reservation6:
+  arrival:      <%= Date.today - 8.days %>
+  departure:    <%= Date.today - 6.days %>
+  adults:       <%= rand(1..2) %>
+  children:     <%= rand(0..2) %>
+  bedclothes_service: <%= [true, false].sample %>
+  visitor:      user1
+
+reservation7:
+  arrival:      <%= Date.today - 6.days %>
+  departure:    <%= Date.today - 5.days %>
+  adults:       <%= rand(1..2) %>
+  children:     <%= rand(0..2) %>
+  bedclothes_service: <%= [true, false].sample %>
+  visitor:      user1
+
+reservation8:
+  arrival:      <%= Date.today - 4.days %>
+  departure:    <%= Date.today %>
+  adults:       <%= rand(1..2) %>
+  children:     <%= rand(0..2) %>
+  bedclothes_service: <%= [true, false].sample %>
+  visitor:      user1

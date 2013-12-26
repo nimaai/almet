@@ -10,6 +10,8 @@ class Reservation < ActiveRecord::Base
     errors.add(:base, "Requested reservation conflicts with some other reservation") if Reservation.all.any? {|r| conflicts? r }
   end
 
+  scope :past, -> {where("departure <= ?", Date.today).order("departure DESC")}
+
   def conflicts?(other)
     departure > other.arrival and arrival < other.departure
   end
