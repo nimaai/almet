@@ -18,13 +18,9 @@ class ReservationsControllerTest < ActionController::TestCase
 
   test "should create reservation" do
 
-    @request.env['HTTP_REFERER'] = new_reservation_path
-
     assert_difference "Reservation.count" do
       post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
-
-    assert_redirected_to reservations_path, flash[:notice]
 
   end
 
