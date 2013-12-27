@@ -3,6 +3,8 @@ class ReservationsController < ApplicationController
   def index
     @reservations = if params[:past]
                       Reservation.past
+                    elsif params[:future]
+                      Reservation.future
                     else
                       Reservation.order(:arrival)
                     end

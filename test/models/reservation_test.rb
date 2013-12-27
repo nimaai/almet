@@ -141,5 +141,10 @@ class ReservationTest < ActiveSupport::TestCase
     assert_equal Reservation.past.first, Reservation.select{|r| r.departure <= Date.today}.sort_by(&:departure).last
   end
 
+  test "future reservations" do
+    assert_equal Reservation.future.count, Reservation.select{|r| r.arrival >= Date.today}.count
+    assert_equal Reservation.future.first, Reservation.select{|r| r.arrival >= Date.today}.sort_by(&:arrival).first
+  end
+
 end
 

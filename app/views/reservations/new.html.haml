@@ -1,0 +1,64 @@
+= form_for :reservation, url: reservations_path, html: {role: "form"} do |reservation_form|
+
+  .form-inline
+
+    .form-group
+      = reservation_form.label :arrival, class: "control-label"
+      .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => Date.today.strftime("%d.%m.%Y"), :"data-name" => "reservation[arrival]"}
+
+    .form-group
+      = reservation_form.label :departure, class: "control-label"
+      .bfh-datepicker{:"data-format" => "d.m.y",:"data-date" => Date.tomorrow.strftime("%d.%m.%Y"), :"data-name" => "reservation[departure]"}
+
+    .form-group
+      = reservation_form.label :adults, "Number of adults", class: "control-label"
+      = reservation_form.number_field :adults, value: 1, min: 1, class: "form-control"
+
+  = reservation_form.fields_for :visitor_attributes do |visitor_fields|
+
+    .form-inline.top-buffer
+
+      .form-group
+        = visitor_fields.label :firstname, class: "control-label"
+        = visitor_fields.text_field :firstname, class: "form-control", placeholder: "Enter firstname"
+
+      .form-group
+        = visitor_fields.label :lastname, class: "control-label"
+        = visitor_fields.text_field :lastname, class: "form-control", placeholder: "Enter lastname"
+
+    .form-inline.top-buffer
+
+      .form-group
+        = visitor_fields.label :street, class: "control-label"
+        = visitor_fields.text_field :street, class: "form-control"
+
+      .form-group
+        = visitor_fields.label :zip, class: "control-label"
+        = visitor_fields.text_field :zip, class: "form-control"
+
+      .form-group
+        = visitor_fields.label :city, class: "control-label"
+        = visitor_fields.text_field :city, class: "form-control"
+
+      .form-group
+        = visitor_fields.label :country, class: "control-label"
+        = visitor_fields.text_field :country, class: "form-control"
+
+    .form-inline.top-buffer
+
+      .form-group
+        = visitor_fields.label :mobile, class: "control-label"
+        = visitor_fields.phone_field :mobile, class: "form-control"
+
+      .form-group
+        = visitor_fields.label :phone, class: "control-label"
+        = visitor_fields.phone_field :phone, class: "form-control"
+
+      .form-group
+        = visitor_fields.label :email, class: "control-label"
+        = visitor_fields.email_field :email, class: "form-control"
+
+  .form-inline
+
+    .form-group.top-buffer
+      = reservation_form.button
