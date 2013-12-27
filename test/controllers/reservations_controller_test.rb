@@ -22,7 +22,7 @@ class ReservationsControllerTest < ActionController::TestCase
       post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
 
-    assert_redirected_to reservations_path
+    assert_redirected_to reservations_path(future: true)
     assert_not_nil flash[:success]
 
   end

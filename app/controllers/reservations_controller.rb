@@ -15,10 +15,10 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       flash[:success] = "New reservation successfully created"
-      redirect_to reservations_path
+      redirect_to reservations_path(future: true) and return
     else
       flash[:error] = @reservation.errors.full_messages.join(", ")
-      redirect_to :back
+      redirect_to :back and return
     end
   end
 
