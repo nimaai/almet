@@ -2,21 +2,37 @@
 
   .form-inline
 
-    .form-group
-      = reservation_form.label :arrival, class: "control-label"
-      .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => Date.today.strftime("%d.%m.%Y"), :"data-name" => "reservation[arrival]"}
+    %h3
+      Reservation
 
-    .form-group
-      = reservation_form.label :departure, class: "control-label"
-      .bfh-datepicker{:"data-format" => "d.m.y",:"data-date" => Date.tomorrow.strftime("%d.%m.%Y"), :"data-name" => "reservation[departure]"}
+    .row.voffset4
+      .col-lg-4.form-group
+        = reservation_form.label :arrival, class: "control-label"
+        .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => Date.today.strftime("%d.%m.%Y"), :"data-name" => "reservation[arrival]"}
 
-    .form-group
-      = reservation_form.label :adults, "Number of adults", class: "control-label"
-      = reservation_form.number_field :adults, value: 1, min: 1, class: "form-control"
+      .col-lg-4.form-group
+        = reservation_form.label :departure, class: "control-label"
+        .bfh-datepicker{:"data-format" => "d.m.y",:"data-date" => Date.tomorrow.strftime("%d.%m.%Y"), :"data-name" => "reservation[departure]"}
+
+      .col-lg-1.form-group
+        = reservation_form.label :adults, "Adults", class: "control-label"
+        = reservation_form.number_field :adults, value: 1, min: 1, class: "form-control"
+
+      .col-lg-1.form-group
+        = reservation_form.label :children, "Children", class: "control-label"
+        = reservation_form.number_field :children, value: 0, class: "form-control"
+
+      .col-lg-2.form-group
+        = reservation_form.label :bedroom_service, "Bedclothes service", class: "control-label"
+        .input-group
+          %input{type: :checkbox}
 
   = reservation_form.fields_for :visitor_attributes do |visitor_fields|
 
-    .form-inline.top-buffer
+    %h3.voffset6
+      Visitor
+
+    .form-inline.voffset4
 
       .form-group
         = visitor_fields.label :firstname, class: "control-label"
@@ -26,7 +42,7 @@
         = visitor_fields.label :lastname, class: "control-label"
         = visitor_fields.text_field :lastname, class: "form-control", placeholder: "Enter lastname"
 
-    .form-inline.top-buffer
+    .form-inline.voffset4
 
       .form-group
         = visitor_fields.label :street, class: "control-label"
@@ -44,7 +60,7 @@
         = visitor_fields.label :country, class: "control-label"
         = visitor_fields.text_field :country, class: "form-control"
 
-    .form-inline.top-buffer
+    .form-inline.voffset4
 
       .form-group
         = visitor_fields.label :mobile, class: "control-label"
@@ -60,5 +76,5 @@
 
   .form-inline
 
-    .form-group.top-buffer
+    .form-group.voffset4
       = reservation_form.button
