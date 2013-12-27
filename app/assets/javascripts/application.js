@@ -11,7 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap/dist/js/bootstrap
 //= require bootstrap-form-helpers/dist/js/bootstrap-formhelpers
+//= require turbolinks
