@@ -2,7 +2,7 @@
 
   .form-inline
 
-    %h3
+    %h3.text-primary
       Reservation
 
     .row.voffset4
@@ -16,11 +16,11 @@
 
       .col-lg-1.form-group
         = reservation_form.label :adults, "Adults", class: "control-label"
-        = reservation_form.number_field :adults, value: 1, min: 1, class: "form-control"
+        = reservation_form.select :adults, 1..9, value: 1, class: "form-control"
 
       .col-lg-1.form-group
         = reservation_form.label :children, "Children", class: "control-label"
-        = reservation_form.number_field :children, value: 0, class: "form-control"
+        = reservation_form.select :children, 0..9, value: 0, class: "form-control"
 
       .col-lg-2.form-group
         = reservation_form.label :bedroom_service, "Bedclothes service", class: "control-label"
@@ -29,7 +29,7 @@
 
   = reservation_form.fields_for :visitor_attributes do |visitor_fields|
 
-    %h3.voffset6
+    %h3.text-primary.voffset6
       Visitor
 
     .row.form-inline.voffset4
@@ -58,7 +58,7 @@
 
       .col-lg-3.form-group
         = visitor_fields.label :country, class: "control-label"
-        = visitor_fields.text_field :country, class: "form-control"
+        = visitor_fields.country_select :country, ["Slovakia"], class: "form-control"
 
     .row.form-inline.voffset4
 
@@ -77,4 +77,4 @@
   .form-inline
 
     .form-group.voffset4
-      = reservation_form.button
+      = reservation_form.button "Send", class: "btn btn-primary"

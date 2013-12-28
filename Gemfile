@@ -42,6 +42,8 @@ gem "haml", "~> 4.0.4"
 
 gem "slim", "~> 2.0.2"
 
+gem 'country_select'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
