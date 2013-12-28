@@ -13,6 +13,13 @@ class Reservation < ActiveRecord::Base
   scope :past, -> { where("departure <= ?", Date.today).order("departure DESC") }
   scope :future, -> { where("arrival >= ?", Date.today).order("arrival ASC") }
 
+  after_initialize do
+    if new_record?
+      self.arrival ||= Date.today
+      self.departure ||= Date.tomorrow
+    end
+  end
+
   def conflicts?(other)
     departure > other.arrival and arrival < other.departure
   end

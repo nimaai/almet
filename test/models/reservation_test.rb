@@ -146,5 +146,17 @@ class ReservationTest < ActiveSupport::TestCase
     assert_equal Reservation.future.first, Reservation.select{|r| r.arrival >= Date.today}.sort_by(&:arrival).first
   end
 
+  test "default values for new reservation" do
+    reservation = Reservation.new
+    assert_equal reservation.arrival, Date.today
+    assert_equal reservation.departure, Date.tomorrow
+  end
+
+  test "no default values for reservation fetched from data base" do
+    reservation = Reservation.where("arrival != ? AND departure != ?", Date.today, Date.tomorrow).first
+    assert_not_equal reservation.arrival, Date.today
+    assert_not_equal reservation.departure, Date.tomorrow
+  end
+
 end
 
