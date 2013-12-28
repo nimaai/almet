@@ -159,4 +159,3 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
 end
-

@@ -8,24 +8,24 @@
     .row.voffset4
       .col-lg-3.form-group
         = reservation_form.label :arrival, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => Date.today.strftime("%d.%m.%Y"), :"data-name" => "reservation[arrival]"}
+        .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => @reservation.arrival, :"data-name" => "reservation[arrival]"}
 
       .col-lg-3.form-group
         = reservation_form.label :departure, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y",:"data-date" => Date.tomorrow.strftime("%d.%m.%Y"), :"data-name" => "reservation[departure]"}
+        .bfh-datepicker{:"data-format" => "d.m.y", :"data-date" => @reservation.departure.strftime("%d.%m.%Y"), :"data-name" => "reservation[departure]"}
 
       .col-lg-1.form-group
         = reservation_form.label :adults, "Adults", class: "control-label"
-        = reservation_form.select :adults, 1..9, value: 1, class: "form-control"
+        = reservation_form.select :adults, 1..9, value: @reservation.adults, class: "form-control"
 
       .col-lg-1.form-group
         = reservation_form.label :children, "Children", class: "control-label"
-        = reservation_form.select :children, 0..9, value: 0, class: "form-control"
+        = reservation_form.select :children, 0..9, value: @reservation.children, class: "form-control"
 
       .col-lg-2.form-group
         = reservation_form.label :bedroom_service, "Bedclothes service", class: "control-label"
         .input-group
-          = reservation_form.check_box :bedroom_service, checked: true
+          = reservation_form.check_box :bedroom_service, checked: @reservation.bedclothes_service
 
   = reservation_form.fields_for :visitor_attributes do |visitor_fields|
 
@@ -36,7 +36,7 @@
 
       .col-lg-3.form-group
         = visitor_fields.label :firstname, class: "control-label"
-        = visitor_fields.text_field :firstname, class: "form-control", :"data-required" => true
+        = visitor_fields.text_field :firstname, class: "form-control"
 
       .col-lg-3.form-group
         = visitor_fields.label :lastname, class: "control-label"
