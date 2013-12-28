@@ -36,7 +36,7 @@
 
       .col-lg-3.form-group
         = visitor_fields.label :firstname, class: "control-label"
-        = visitor_fields.text_field :firstname, class: "form-control"
+        = visitor_fields.text_field :firstname, class: "form-control", :"data-required" => true
 
       .col-lg-3.form-group
         = visitor_fields.label :lastname, class: "control-label"
@@ -78,3 +78,7 @@
 
     .form-group.voffset4
       = reservation_form.button "Send", class: "btn btn-primary"
+
+:coffeescript
+
+  jQuery -> $("form#new_reservation").validate()

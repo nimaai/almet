@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap
 //= require bootstrap-form-helpers/dist/js/bootstrap-formhelpers
+//= require Validate/jquery-validate
 //= require turbolinks
