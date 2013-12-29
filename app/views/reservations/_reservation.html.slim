@@ -6,3 +6,5 @@ tr class="#{'success' if reservation.present?}"
   td = reservation.children
   td = (reservation.bedclothes_service ? "Yes" : "No")
   td = reservation.visitor.fullname
+  td
+    = link_to "Delete", reservation, method: :delete, role: "button", class: "btn btn-xs btn-danger"

@@ -78,6 +78,9 @@ class ReservationsControllerTest < ActionController::TestCase
         assert_select line, "td:nth-child(5)", reservations[i].children.to_s
         assert_select line, "td:nth-child(6)", (reservations[i].bedclothes_service ? "Yes" : "No")
         assert_select line, "td:nth-child(7)", reservations[i].visitor.fullname
+        assert_select line, "td:nth-child(8)" do
+          assert_select "a[href='#{reservation_path(reservations[i].id)}']", "Delete"
+        end
       end
     end
 
@@ -99,4 +102,5 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_select "table tbody tr.success td:nth-child(2)", p.arrival.to_s
     assert_select "table tbody tr.success td:nth-child(3)", p.departure.to_s
   end
+
 end
