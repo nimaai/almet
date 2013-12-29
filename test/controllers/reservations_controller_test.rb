@@ -16,6 +16,13 @@ class ReservationsControllerTest < ActionController::TestCase
                        email:        "new_user@email.com" }
   end
 
+  test "new should initialize reservation and visitor" do
+    get :new
+    r = assigns(:reservation)
+    assert r
+    assert r.visitor
+  end
+
   test "should create reservation" do
 
     assert_difference "Reservation.count" do
