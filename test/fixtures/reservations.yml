@@ -57,3 +57,11 @@ reservation8:
   children:     <%= rand(0..2) %>
   bedclothes_service: <%= [true, false].sample %>
   visitor:      user1
+
+reservation9:
+  arrival:      <%= Date.today %>
+  departure:    <%= Date.tomorrow %>
+  adults:       <%= rand(1..2) %>
+  children:     <%= rand(0..2) %>
+  bedclothes_service: <%= [true, false].sample %>
+  visitor:      user1

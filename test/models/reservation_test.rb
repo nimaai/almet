@@ -3,8 +3,8 @@ require 'test_helper.rb'
 class ReservationTest < ActiveSupport::TestCase
 
   def setup
-    @reservation_attrs = { arrival:            Date.today.to_s,
-                           departure:          Date.tomorrow.to_s,
+    @reservation_attrs = { arrival:            Date.today + 1,
+                           departure:          Date.tomorrow + 1,
                            adults:             2,
                            bedclothes_service: true }
 
@@ -142,8 +142,12 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test "future reservations" do
-    assert_equal Reservation.future.count, Reservation.select{|r| r.arrival >= Date.today}.count
-    assert_equal Reservation.future.first, Reservation.select{|r| r.arrival >= Date.today}.sort_by(&:arrival).first
+    assert_equal Reservation.future.count, Reservation.select{|r| r.arrival >= Date.tomorrow}.count
+    assert_equal Reservation.future.first, Reservation.select{|r| r.arrival >= Date.tomorrow}.sort_by(&:arrival).first
+  end
+
+  test "present reservation" do
+    assert_equal Reservation.present, Reservation.find{|r| r.departure >= Date.tomorrow}
   end
 
   test "default values for new reservation" do

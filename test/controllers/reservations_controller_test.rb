@@ -1,8 +1,8 @@
 class ReservationsControllerTest < ActionController::TestCase
 
   def setup
-    @reservation_attrs = { arrival:            Date.today.to_s,
-                           departure:          Date.tomorrow.to_s,
+    @reservation_attrs = { arrival:            Date.today + 1,
+                           departure:          Date.tomorrow + 1,
                            adults:             2,
                            bedclothes_service: true }
 
