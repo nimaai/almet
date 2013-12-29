@@ -4,7 +4,11 @@ class ReservationsController < ApplicationController
     @reservations = if params[:past]
                       Reservation.past
                     elsif params[:future]
-                      Reservation.future
+                      futures = Reservation.future
+                      if params[:present] and present = Reservation.present
+                        futures.unshift present
+                      end
+                      futures
                     else
                       Reservation.order(:arrival)
                     end

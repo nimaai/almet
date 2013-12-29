@@ -12,7 +12,7 @@ class Reservation < ActiveRecord::Base
 
   scope :past, -> { where("departure <= ?", Date.today).order("departure DESC") }
   scope :future, -> { where("arrival >= ?", Date.tomorrow).order("arrival ASC") }
-  scope :present, -> { where("departure >= ?", Date.tomorrow).first }
+  scope :present, -> { where("arrival <= ? AND departure >= ?", Date.today, Date.tomorrow).first }
 
   after_initialize do
     if new_record?
@@ -23,6 +23,10 @@ class Reservation < ActiveRecord::Base
 
   def conflicts?(other)
     departure > other.arrival and arrival < other.departure
+  end
+
+  def present?
+    self == Reservation.present
   end
 
 end

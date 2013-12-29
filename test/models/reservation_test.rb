@@ -147,7 +147,9 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test "present reservation" do
-    assert_equal Reservation.present, Reservation.find{|r| r.departure >= Date.tomorrow}
+    r = Reservation.present
+    assert_equal r, Reservation.find{|r| r.arrival <= Date.today and r.departure >= Date.tomorrow}
+    assert r.present?
   end
 
   test "default values for new reservation" do
