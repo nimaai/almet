@@ -25,7 +25,7 @@ class CreateReservationFlowTest < ActionDispatch::IntegrationTest
     assert_difference("Reservation.count", +1) do
       post_via_redirect reservations_path, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
-    assert_select ".alert-success", "New reservation successfully created"
+    assert_select ".alert-success"
     assert_select "table tbody tr", Reservation.future.count
   end
 
