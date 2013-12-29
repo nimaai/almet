@@ -34,6 +34,15 @@ class ReservationsControllerTest < ActionController::TestCase
 
   end
 
+  test "validation errors upon creation" do
+    @visitor_attrs[:email] = nil
+    assert_no_difference "Reservation.count" do
+      post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    end
+    assert_template :new
+    assert_not_nil flash[:error]
+  end
+
   test "should get index of reservations" do
 
     get :index
