@@ -46,6 +46,8 @@ gem 'country_select'
 
 gem "better_errors", "~> 1.1.0", group: :development
 
+gem "binding_of_caller", "~> 0.7.2", group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
