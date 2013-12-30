@@ -8,6 +8,7 @@ class DeleteReservationFlowTest < ActionDispatch::IntegrationTest
     end
     assert_response :success
     assert_template :index, flash[:success]
+    assert_template layout: "layouts/application", partial: "_reservation"
     assert_raises(ActiveRecord::RecordNotFound) { @r.reload }
   end
 
