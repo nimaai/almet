@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
 
   def index
-    @present_reservation = Reservation.present if params[:present]
+    @present_reservation = Reservation.where("arrival <= ? AND departure >= ?", Date.today, Date.tomorrow).first if params[:present]
     @reservations = if params[:past]
                       Reservation.past
                     elsif params[:future]
