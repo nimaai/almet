@@ -44,6 +44,8 @@ gem "slim", "~> 2.0.2"
 
 gem 'country_select'
 
+gem "better_errors", "~> 1.1.0", group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
