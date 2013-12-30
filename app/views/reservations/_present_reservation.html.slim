@@ -1,0 +1,8 @@
+h3.text-primary Present reservation
+
+table#present-reservation.table
+
+  = render "table_header"
+
+  tbody
+    = render partial: "reservation_line", object: present_reservation, as: :reservation

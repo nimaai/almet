@@ -1,13 +1,3 @@
-table.table
-  thead
-    tr
-      th #
-      th Arrival
-      th Departure
-      th Adults
-      th Children
-      th Bedclothes Service
-      th Visitor
+= render partial: "present_reservation", object: @present_reservation if @present_reservation
 
-  tbody
-    = render @reservations
+= render partial: "reservations"

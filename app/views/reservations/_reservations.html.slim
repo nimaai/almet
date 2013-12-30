@@ -1,0 +1,8 @@
+h3.text-primary class=("voffset5" if @present_reservation) Future reservations
+
+table#reservations.table
+
+  = render "table_header"
+
+  tbody
+    = render partial: "reservation_line", collection: @reservations, as: :reservation

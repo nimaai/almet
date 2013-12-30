@@ -8,17 +8,20 @@ class DeleteReservationFlowTest < ActionDispatch::IntegrationTest
     end
     assert_response :success
     assert_template :index, flash[:success]
-    assert_template layout: "layouts/application", partial: "_reservation"
-    assert_raises(ActiveRecord::RecordNotFound) { @r.reload }
   end
 
   test "delete future reservation" do
     @r = Reservation.future.first
     shared_steps
+    assert_template layout: "layouts/application", partial: "_reservations"
+    assert_raises(ActiveRecord::RecordNotFound) { @r.reload }
   end
 
   test "delete present reservation" do
     @r = Reservation.present
     shared_steps
+    assert_template layout: "layouts/application", partial: "_present_reservation"
+    assert_template layout: "layouts/application", partial: "_reservations"
+    assert_raises(ActiveRecord::RecordNotFound) { @r.reload }
   end
 end

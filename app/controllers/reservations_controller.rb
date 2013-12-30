@@ -1,15 +1,11 @@
 class ReservationsController < ApplicationController
 
   def index
+    @present_reservation = Reservation.present if params[:present]
     @reservations = if params[:past]
                       Reservation.past
                     elsif params[:future]
-                      futures = Reservation.future
-                      if params[:present]
-                        present = Reservation.present
-                        futures.unshift present if present
-                      end
-                      futures
+                      Reservation.future
                     else
                       Reservation.order(:arrival)
                     end
