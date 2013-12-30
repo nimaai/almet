@@ -5,8 +5,9 @@ class ReservationsController < ApplicationController
                       Reservation.past
                     elsif params[:future]
                       futures = Reservation.future
-                      if params[:present] and present = Reservation.present
-                        futures.unshift present
+                      if params[:present]
+                        present = Reservation.present
+                        futures.unshift present if present
                       end
                       futures
                     else
@@ -33,7 +34,7 @@ class ReservationsController < ApplicationController
 
   def destroy
     Reservation.find(params[:id]).destroy
-    redirect_to :back, flash: { success: "Reservation successfully deleted" }
+    redirect_to :back, flash: { success: "Reservation successfully deleted" } and return
   end
 
   private
