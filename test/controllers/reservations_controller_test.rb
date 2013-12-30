@@ -115,17 +115,7 @@ class ReservationsControllerTest < ActionController::TestCase
     get :index, past: true
     assert_template :index
     assert_select "table tbody tr", Reservation.past.count
+    assert_select "h3", "Past reservations"
   end
-
-  #test "present and future reservations" do
-    #get :index, present: true, future: true
-    #assert_template :index
-    #assert_select "table tbody tr", Reservation.future.count + 1
-
-    #p = Reservation.present
-    #assert_select "table tbody tr.success td:nth-child(1)", 1
-    #assert_select "table tbody tr.success td:nth-child(2)", p.arrival.to_s
-    #assert_select "table tbody tr.success td:nth-child(3)", p.departure.to_s
-  #end
 
 end

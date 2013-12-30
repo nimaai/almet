@@ -1,4 +1,7 @@
-h3.text-primary class=("voffset5" if @present_reservation) Future reservations
+- title = "Future reservations" if params[:future]
+- title = "Past reservations" if params[:past]
+
+h3.text-primary class=("voffset5" if @present_reservation and params[:future]) = title
 
 table#reservations.table
 
