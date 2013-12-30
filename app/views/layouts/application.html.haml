@@ -20,16 +20,13 @@
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li.dropdown
-              %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"}
+              %a.dropdown-toggle{:"data-hover" => "dropdown", :href => reservations_path(present: true, future: true)}
                 Reservations
                 %b.caret
               %ul.dropdown-menu{role: "menu"}
                 %li
                   %a{href: new_reservation_path}
                     New
-                %li
-                  %a{href: reservations_path(present: true, future: true)}
-                    Now and future
                 %li
                   %a{href: reservations_path(past: true)}
                     Past
