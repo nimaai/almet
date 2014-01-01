@@ -80,8 +80,8 @@ class ReservationsControllerTest < ActionController::TestCase
 
     assert_select "table#present-reservation tbody" do
       assert_select "tr td:nth-child(1)", 1
-      assert_select "tr td:nth-child(2)", present_reservation.arrival.to_s
-      assert_select "tr td:nth-child(3)", present_reservation.departure.to_s
+      assert_select "tr td:nth-child(2)", I18n.l(present_reservation.arrival)
+      assert_select "tr td:nth-child(3)", I18n.l(present_reservation.departure)
       assert_select "tr td:nth-child(4)", present_reservation.adults.to_s
       assert_select "tr td:nth-child(5)", present_reservation.children.to_s
       assert_select "tr td:nth-child(6)", (present_reservation.bedclothes_service ? "Yes" : "No")
@@ -96,8 +96,8 @@ class ReservationsControllerTest < ActionController::TestCase
       assert_select "tr" do |lines|
         lines.each_with_index do |line, i|
           assert_select line, "td:nth-child(1)", number: i + 1
-          assert_select line, "td:nth-child(2)", reservations[i].arrival.to_s
-          assert_select line, "td:nth-child(3)", reservations[i].departure.to_s
+          assert_select line, "td:nth-child(2)", I18n.l(reservations[i].arrival)
+          assert_select line, "td:nth-child(3)", I18n.l(reservations[i].departure)
           assert_select line, "td:nth-child(4)", reservations[i].adults.to_s
           assert_select line, "td:nth-child(5)", reservations[i].children.to_s
           assert_select line, "td:nth-child(6)", (reservations[i].bedclothes_service ? "Yes" : "No")
