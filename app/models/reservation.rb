@@ -8,7 +8,7 @@ class Reservation < ActiveRecord::Base
 
   validate do
     if cr = Reservation.find {|r| conflicts? r }
-      errors.add(:base, "Requested reservation conflicts with another reservation (#{cr.arrival} - #{cr.departure})")
+      errors.add(:base, "Requested reservation conflicts with another reservation (#{I18n.l cr.arrival} - #{I18n.l cr.departure})")
     end
 
     errors.add(:base, "Arrival date cannot be in the past") if arrival.past?

@@ -46,7 +46,7 @@ class ReservationTest < ActiveSupport::TestCase
     r = Reservation.new arrival: Date.today + 4.days, departure: Date.today + 6.days, adults: 1, bedclothes_service: true, visitor_attributes: @visitor_attrs
     cr = Reservation.find {|cr| r.conflicts? cr}
     assert_not r.save
-    assert_match /#{cr.arrival} - #{cr.departure}/, r.errors.full_messages.first
+    assert_match /#{I18n.l cr.arrival} - #{I18n.l cr.departure}/, r.errors.full_messages.first
 
     # -.-*-.-.-*-.-
     # -.-*-*-.-.-.-
