@@ -8,6 +8,8 @@ class Reservation < ActiveRecord::Base
 
   validate do
     errors.add(:base, "Requested reservation conflicts with some other reservation") if Reservation.all.any? {|r| conflicts? r }
+    errors.add(:base, "Arrival date cannot be in the past") if arrival.past?
+    errors.add(:base, "Arrival date must be before departure date") if arrival >= departure
   end
 
   scope :past, -> { where("departure <= ?", Date.today).order("departure DESC") }

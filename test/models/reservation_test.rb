@@ -3,7 +3,7 @@ require 'test_helper.rb'
 class ReservationTest < ActiveSupport::TestCase
 
   def setup
-    @reservation_attrs = { arrival:            Date.today + 1,
+    @reservation_attrs = { arrival:            Date.tomorrow,
                            departure:          Date.tomorrow + 1,
                            adults:             2,
                            bedclothes_service: true }
@@ -164,4 +164,25 @@ class ReservationTest < ActiveSupport::TestCase
     assert_not_equal reservation.departure, Date.tomorrow
   end
 
+  test "validation of arrival time in the past" do
+    @reservation_attrs[:arrival] = Date.yesterday
+    r = Reservation.new @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    assert_not r.save
+    assert_not r.persisted?
+    assert_not r.visitor.persisted?
+  end
+
+  test "validation of departure time being before arrival time" do
+    @reservation_attrs[:departure] = Date.today
+    r = Reservation.new @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    assert_not r.save
+    assert_not r.persisted?
+    assert_not r.visitor.persisted?
+
+    @reservation_attrs[:departure] = Date.tomorrow
+    r = Reservation.new @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    assert_not r.save
+    assert_not r.persisted?
+    assert_not r.visitor.persisted?
+  end
 end
