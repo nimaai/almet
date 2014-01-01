@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui/js/jquery-ui-1.10.3.custom
 //= require bootstrap/dist/js/bootstrap
 //= require bootstrap-form-helpers/dist/js/bootstrap-formhelpers
 //= require bootstrap-hover-dropdown/bootstrap-hover-dropdown
-//= require Validate/jquery-validate
 //= require turbolinks

@@ -8,11 +8,11 @@
     .row.voffset4
       .col-lg-3.form-group
         = reservation_form.label :arrival, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => @reservation.arrival, :"data-name" => "reservation[arrival]"}
+        = reservation_form.date_field :arrival, class: "form-control"
 
       .col-lg-3.form-group
         = reservation_form.label :departure, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y", :"data-date" => l(@reservation.departure), :"data-name" => "reservation[departure]"}
+        = reservation_form.date_field :departure, class: "form-control"
 
       .col-lg-1.form-group
         = reservation_form.label :adults, "Adults", class: "control-label"
@@ -79,3 +79,7 @@
 
     .form-group.voffset4
       = reservation_form.button "Send", class: "btn btn-primary"
+
+:coffeescript
+
+  jQuery -> $("#reservation_arrival, #reservation_departure").datepicker()
