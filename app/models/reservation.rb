@@ -7,7 +7,10 @@ class Reservation < ActiveRecord::Base
   validates_presence_of :arrival, :departure, :adults, :bedclothes_service
 
   validate do
-    errors.add(:base, "Requested reservation conflicts with some other reservation") if Reservation.all.any? {|r| conflicts? r }
+    if cr = Reservation.find {|r| conflicts? r }
+      errors.add(:base, "Requested reservation conflicts with another reservation (#{cr.arrival} - #{cr.departure})")
+    end
+
     errors.add(:base, "Arrival date cannot be in the past") if arrival.past?
     errors.add(:base, "Arrival date must be before departure date") if arrival >= departure
   end

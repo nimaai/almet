@@ -12,7 +12,7 @@
 
       .col-lg-3.form-group
         = reservation_form.label :departure, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y", :"data-date" => @reservation.departure.strftime("%d.%m.%Y"), :"data-name" => "reservation[departure]"}
+        .bfh-datepicker{:"data-format" => "d.m.y", :"data-date" => l(@reservation.departure), :"data-name" => "reservation[departure]"}
 
       .col-lg-1.form-group
         = reservation_form.label :adults, "Adults", class: "control-label"

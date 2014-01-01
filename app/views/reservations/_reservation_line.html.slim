@@ -1,7 +1,7 @@
 tr class="#{'success' if reservation.present?}"
   td = if defined? reservation_counter then reservation_counter + 1 else 1 end
-  td = reservation.arrival
-  td = reservation.departure
+  td = l reservation.arrival
+  td = l reservation.departure
   td = reservation.adults
   td = reservation.children
   td = (reservation.bedclothes_service ? "Yes" : "No")
