@@ -35,13 +35,19 @@ class Reservation < ActiveRecord::Base
     arrival <= Date.today and departure >= Date.tomorrow
   end
 
-  def reserved_dates(from_today = false)
-    start_date = from_today ? Date.today : arrival
+  def reserved_dates(from_today: false, exclude_arrival: false)
+    start_date = if from_today
+                   Date.today
+                 elsif exclude_arrival
+                   arrival + 1
+                 else
+                   arrival
+                 end
     (start_date..departure - 1).to_a
   end
 
-  def Reservation.reserved_dates_from_today
-    Reservation.present_and_future.flat_map {|r| r.present? ? r.reserved_dates(:from_today) : r.reserved_dates }
+  def Reservation.reserved_dates_from_today(exclude_arrival_dates = false)
+    Reservation.present_and_future.flat_map {|r| r.present? ? r.reserved_dates(:from_today) : r.reserved_dates(exclude_arrival: exclude_arrival_dates) }
   end
 
 end
