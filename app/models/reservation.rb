@@ -47,7 +47,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def Reservation.reserved_dates_from_today(exclude_arrival_dates = false)
-    Reservation.present_and_future.flat_map {|r| r.present? ? r.reserved_dates(:from_today) : r.reserved_dates(exclude_arrival: exclude_arrival_dates) }
+    Reservation.present_and_future.flat_map {|r| r.present? ? r.reserved_dates(from_today: true) : r.reserved_dates(exclude_arrival: exclude_arrival_dates) }
   end
 
 end
