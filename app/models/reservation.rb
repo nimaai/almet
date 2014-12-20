@@ -5,9 +5,9 @@ class Reservation < ActiveRecord::Base
   accepts_nested_attributes_for \
     :visitor,
     reject_if: \
-      Proc.new { |attributes|
+      (proc do |attributes|
         Visitor.exists? email: attributes[:email]
-      }
+      end)
 
   validates_presence_of :arrival, :departure, :adults, :bedclothes_service
 
