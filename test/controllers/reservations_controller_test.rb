@@ -6,26 +6,26 @@ class ReservationsControllerTest < ActionController::TestCase
                            adults:             2,
                            bedclothes_service: true }
 
-    @visitor_attrs = { firstname:    "FirstnameX",
-                       lastname:     "LastnameX",
-                       street:       "StreetX 13",
-                       zip:          "ZipX", city:         "CityX",
-                       country:      "CountryX",
-                       mobile:       "0904123456",
-                       phone:        "0411234567",
-                       email:        "new_user@email.com" }
+    @visitor_attrs = { firstname:    'FirstnameX',
+                       lastname:     'LastnameX',
+                       street:       'StreetX 13',
+                       zip:          'ZipX', city:         'CityX',
+                       country:      'CountryX',
+                       mobile:       '0904123456',
+                       phone:        '0411234567',
+                       email:        'new_user@email.com' }
   end
 
-  test "new should initialize reservation and visitor" do
+  test 'new should initialize reservation and visitor' do
     get :new
     r = assigns(:reservation)
     assert r
     assert r.visitor
   end
 
-  test "should create reservation" do
+  test 'should create reservation' do
 
-    assert_difference "Reservation.count" do
+    assert_difference 'Reservation.count' do
       post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
 
@@ -34,16 +34,16 @@ class ReservationsControllerTest < ActionController::TestCase
 
   end
 
-  test "validation errors upon creation" do
+  test 'validation errors upon creation' do
     @visitor_attrs[:email] = nil
-    assert_no_difference "Reservation.count" do
+    assert_no_difference 'Reservation.count' do
       post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
     assert_template :new
     assert_not_nil flash[:error]
   end
 
-  test "should get index of future and present reservations" do
+  test 'should get index of future and present reservations' do
 
     get :index, future: true, present: true
 
@@ -60,50 +60,50 @@ class ReservationsControllerTest < ActionController::TestCase
 
     # test partial
     assert_template :index
-    assert_template layout: "layouts/application", partial: "_present_reservation"
-    assert_template layout: "layouts/application", partial: "_reservations"
-    assert_template layout: "layouts/application", partial: "_reservation_line"
+    assert_template layout: 'layouts/application', partial: '_present_reservation'
+    assert_template layout: 'layouts/application', partial: '_reservations'
+    assert_template layout: 'layouts/application', partial: '_reservation_line'
 
-    assert_select "h3", "Present reservation"
-    assert_select "h3", "Future reservations"
+    assert_select 'h3', 'Present reservation'
+    assert_select 'h3', 'Future reservations'
 
     # test availability of columns
-    assert_select "table thead" do
-      assert_select "th:nth-child(1)", "#"
-      assert_select "th:nth-child(2)", "Arrival"
-      assert_select "th:nth-child(3)", "Departure"
-      assert_select "th:nth-child(4)", "Adults"
-      assert_select "th:nth-child(5)", "Children"
-      assert_select "th:nth-child(6)", "Bedclothes Service"
-      assert_select "th:nth-child(7)", "Visitor"
+    assert_select 'table thead' do
+      assert_select 'th:nth-child(1)', '#'
+      assert_select 'th:nth-child(2)', 'Arrival'
+      assert_select 'th:nth-child(3)', 'Departure'
+      assert_select 'th:nth-child(4)', 'Adults'
+      assert_select 'th:nth-child(5)', 'Children'
+      assert_select 'th:nth-child(6)', 'Bedclothes Service'
+      assert_select 'th:nth-child(7)', 'Visitor'
     end
 
-    assert_select "table#present-reservation tbody" do
-      assert_select "tr td:nth-child(1)", 1
-      assert_select "tr td:nth-child(2)", I18n.l(present_reservation.arrival)
-      assert_select "tr td:nth-child(3)", I18n.l(present_reservation.departure)
-      assert_select "tr td:nth-child(4)", present_reservation.adults.to_s
-      assert_select "tr td:nth-child(5)", present_reservation.children.to_s
-      assert_select "tr td:nth-child(6)", (present_reservation.bedclothes_service ? "Yes" : "No")
-      assert_select "tr td:nth-child(7)", present_reservation.visitor.fullname
-      assert_select "tr td:nth-child(8)" do
-        assert_select "a[href='#{reservation_path(present_reservation.id)}']", "Delete"
+    assert_select 'table#present-reservation tbody' do
+      assert_select 'tr td:nth-child(1)', 1
+      assert_select 'tr td:nth-child(2)', I18n.l(present_reservation.arrival)
+      assert_select 'tr td:nth-child(3)', I18n.l(present_reservation.departure)
+      assert_select 'tr td:nth-child(4)', present_reservation.adults.to_s
+      assert_select 'tr td:nth-child(5)', present_reservation.children.to_s
+      assert_select 'tr td:nth-child(6)', (present_reservation.bedclothes_service ? 'Yes' : 'No')
+      assert_select 'tr td:nth-child(7)', present_reservation.visitor.fullname
+      assert_select 'tr td:nth-child(8)' do
+        assert_select "a[href='#{reservation_path(present_reservation.id)}']", 'Delete'
       end
     end
 
     # test numbering of future reservation lines starting with 1 and increasing & content of lines
-    assert_select "table#reservations tbody" do
-      assert_select "tr" do |lines|
+    assert_select 'table#reservations tbody' do
+      assert_select 'tr' do |lines|
         lines.each_with_index do |line, i|
-          assert_select line, "td:nth-child(1)", number: i + 1
-          assert_select line, "td:nth-child(2)", I18n.l(reservations[i].arrival)
-          assert_select line, "td:nth-child(3)", I18n.l(reservations[i].departure)
-          assert_select line, "td:nth-child(4)", reservations[i].adults.to_s
-          assert_select line, "td:nth-child(5)", reservations[i].children.to_s
-          assert_select line, "td:nth-child(6)", (reservations[i].bedclothes_service ? "Yes" : "No")
-          assert_select line, "td:nth-child(7)", reservations[i].visitor.fullname
-          assert_select line, "td:nth-child(8)" do
-            assert_select "a[href='#{reservation_path(reservations[i].id)}']", "Delete"
+          assert_select line, 'td:nth-child(1)', number: i + 1
+          assert_select line, 'td:nth-child(2)', I18n.l(reservations[i].arrival)
+          assert_select line, 'td:nth-child(3)', I18n.l(reservations[i].departure)
+          assert_select line, 'td:nth-child(4)', reservations[i].adults.to_s
+          assert_select line, 'td:nth-child(5)', reservations[i].children.to_s
+          assert_select line, 'td:nth-child(6)', (reservations[i].bedclothes_service ? 'Yes' : 'No')
+          assert_select line, 'td:nth-child(7)', reservations[i].visitor.fullname
+          assert_select line, 'td:nth-child(8)' do
+            assert_select "a[href='#{reservation_path(reservations[i].id)}']", 'Delete'
           end
         end
       end
@@ -111,11 +111,11 @@ class ReservationsControllerTest < ActionController::TestCase
 
   end
 
-  test "past reservations" do
+  test 'past reservations' do
     get :index, past: true
     assert_template :index
-    assert_select "table tbody tr", Reservation.past.count
-    assert_select "h3", "Past reservations"
+    assert_select 'table tbody tr', Reservation.past.count
+    assert_select 'h3', 'Past reservations'
   end
 
 end

@@ -2,24 +2,25 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.8'
 
-gem "better_errors", group: :development
-gem "binding_of_caller", group: :development
+gem 'better_errors', group: :development
+gem 'binding_of_caller', group: :development
 gem 'coffee-rails'
 gem 'country_select'
-gem "haml"
+gem 'haml'
 # gem 'jbuilder'
 gem 'jquery-rails'
-gem "jquery-turbolinks"
+gem 'jquery-turbolinks'
 gem 'pry', group: [:development, :test]
-gem "pry-rails", group: [:development, :test]
+gem 'pry-rails', group: [:development, :test]
+gem 'rubocop'
 gem 'sass-rails'
-gem "slim", "~> 2.0.2"
+gem 'slim', '~> 2.0.2'
 gem 'sqlite3'
 gem 'turbolinks'
 # gem 'uglifier'
 
 # group :doc do
-  # gem 'sdoc', require: false
+# gem 'sdoc', require: false
 # end
 
 # Use ActiveModel has_secure_password
