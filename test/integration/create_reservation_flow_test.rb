@@ -11,7 +11,8 @@ class CreateReservationFlowTest < ActionDispatch::IntegrationTest
     @visitor_attrs = { firstname:    'FirstnameX',
                        lastname:     'LastnameX',
                        street:       'StreetX 13',
-                       zip:          'ZipX', city:         'CityX',
+                       zip:          'ZipX',
+                       city:         'CityX',
                        country:      'CountryX',
                        mobile:       '0904123456',
                        phone:        '0411234567',
@@ -23,7 +24,10 @@ class CreateReservationFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template :new
     assert_difference('Reservation.count', +1) do
-      post_via_redirect reservations_path, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+      post_via_redirect \
+        reservations_path,
+        reservation: \
+          @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
     assert_select '.alert-success'
     assert_select 'table tbody tr', Reservation.future.count

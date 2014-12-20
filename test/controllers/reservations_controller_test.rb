@@ -26,7 +26,9 @@ class ReservationsControllerTest < ActionController::TestCase
   test 'should create reservation' do
 
     assert_difference 'Reservation.count' do
-      post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+      post :create,
+           reservation: \
+             @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
 
     assert_redirected_to reservations_path(future: true)
@@ -37,7 +39,9 @@ class ReservationsControllerTest < ActionController::TestCase
   test 'validation errors upon creation' do
     @visitor_attrs[:email] = nil
     assert_no_difference 'Reservation.count' do
-      post :create, reservation: @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+      post :create,
+           reservation: \
+             @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
     assert_template :new
     assert_not_nil flash[:error]
@@ -84,14 +88,18 @@ class ReservationsControllerTest < ActionController::TestCase
       assert_select 'tr td:nth-child(3)', I18n.l(present_reservation.departure)
       assert_select 'tr td:nth-child(4)', present_reservation.adults.to_s
       assert_select 'tr td:nth-child(5)', present_reservation.children.to_s
-      assert_select 'tr td:nth-child(6)', (present_reservation.bedclothes_service ? 'Yes' : 'No')
+      assert_select 'tr td:nth-child(6)',
+                    (present_reservation.bedclothes_service ? 'Yes' : 'No')
+
       assert_select 'tr td:nth-child(7)', present_reservation.visitor.fullname
       assert_select 'tr td:nth-child(8)' do
-        assert_select "a[href='#{reservation_path(present_reservation.id)}']", 'Delete'
+        assert_select "a[href='#{reservation_path(present_reservation.id)}']",
+                      'Delete'
       end
     end
 
-    # test numbering of future reservation lines starting with 1 and increasing & content of lines
+    # test numbering of future reservation lines starting with 1
+    # and increasing & content of lines
     assert_select 'table#reservations tbody' do
       assert_select 'tr' do |lines|
         lines.each_with_index do |line, i|
@@ -100,10 +108,14 @@ class ReservationsControllerTest < ActionController::TestCase
           assert_select line, 'td:nth-child(3)', I18n.l(reservations[i].departure)
           assert_select line, 'td:nth-child(4)', reservations[i].adults.to_s
           assert_select line, 'td:nth-child(5)', reservations[i].children.to_s
-          assert_select line, 'td:nth-child(6)', (reservations[i].bedclothes_service ? 'Yes' : 'No')
+          assert_select line,
+                        'td:nth-child(6)',
+                        (reservations[i].bedclothes_service ? 'Yes' : 'No')
+
           assert_select line, 'td:nth-child(7)', reservations[i].visitor.fullname
           assert_select line, 'td:nth-child(8)' do
-            assert_select "a[href='#{reservation_path(reservations[i].id)}']", 'Delete'
+            assert_select "a[href='#{reservation_path(reservations[i].id)}']",
+                          'Delete'
           end
         end
       end

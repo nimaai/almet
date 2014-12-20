@@ -1,7 +1,14 @@
 class ReservationsController < ApplicationController
 
   def index
-    @present_reservation = Reservation.where('arrival <= ? AND departure >= ?', Date.today, Date.tomorrow).first if params[:present]
+    if params[:present]
+      @present_reservation = \
+        Reservation.where('arrival <= ? AND departure >= ?',
+                          Date.today,
+                          Date.tomorrow)
+          .first
+    end
+
     @reservations = if params[:past]
                       Reservation.past
                     elsif params[:future]
@@ -30,13 +37,28 @@ class ReservationsController < ApplicationController
 
   def destroy
     Reservation.find(params[:id]).destroy
-    redirect_to :back, flash: { success: 'Reservation successfully deleted' } and return
+    redirect_to :back,
+                flash: { success: 'Reservation successfully deleted' }
   end
 
   private
 
   def reservation_params
-    params.require(:reservation).permit(:arrival, :departure, :adults, :children, :bedclothes_service, visitor_attributes: [:firstname, :lastname, :street, :zip, :city, :country, :mobile, :phone, :email])
+    params.require(:reservation).permit \
+      :arrival,
+      :departure,
+      :adults,
+      :children,
+      :bedclothes_service,
+      visitor_attributes: [:firstname,
+                           :lastname,
+                           :street,
+                           :zip,
+                           :city,
+                           :country,
+                           :mobile,
+                           :phone,
+                           :email]
   end
 
 end
