@@ -2,22 +2,40 @@ class Reservation < ActiveRecord::Base
 
   belongs_to :visitor
 
-  accepts_nested_attributes_for :visitor, reject_if: proc {|attributes| Visitor.exists? email: attributes[:email] }
+  accepts_nested_attributes_for \
+    :visitor,
+    reject_if: \
+      (proc do |attributes|
+        Visitor.exists? email: attributes[:email]
+      end)
 
   validates_presence_of :arrival, :departure, :adults, :bedclothes_service
 
   validate do
-    if cr = Reservation.find {|r| conflicts? r }
-      errors.add(:base, "Requested reservation conflicts with another reservation (#{I18n.l cr.arrival} - #{I18n.l cr.departure})")
+    if cr = Reservation.find { |r| conflicts? r }
+      errors.add \
+        :base,
+        %(Requested reservation conflicts with another reservation \
+          (#{I18n.l cr.arrival} - #{I18n.l cr.departure}))
     end
 
-    errors.add(:base, "Arrival date cannot be in the past") if arrival.past?
-    errors.add(:base, "Arrival date must be before departure date") if arrival >= departure
+    errors.add(:base, 'Arrival date cannot be in the past') if arrival.past?
+
+    if arrival >= departure
+      errors.add(:base, 'Arrival date must be before departure date')
+    end
   end
 
-  scope :past, -> { where("departure <= ?", Date.today).order("departure DESC") }
-  scope :future, -> { where("arrival >= ?", Date.tomorrow).order("arrival ASC") }
-  scope :present, -> { where("arrival <= ? AND departure >= ?", Date.today, Date.tomorrow).first }
+  scope :past, -> { where('departure <= ?', Date.today).order('departure DESC') }
+  scope :future, -> { where('arrival >= ?', Date.tomorrow).order('arrival ASC') }
+
+  scope :present, lambda {
+    where('arrival <= ? AND departure >= ?',
+          Date.today,
+          Date.tomorrow)
+      .first
+  }
+  
   scope :present_and_future, -> { where("departure >= ?", Date.tomorrow).order("departure ASC") }
 
   after_initialize do

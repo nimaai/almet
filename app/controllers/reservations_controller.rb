@@ -1,7 +1,14 @@
 class ReservationsController < ApplicationController
 
   def index
-    @present_reservation = Reservation.where("arrival <= ? AND departure >= ?", Date.today, Date.tomorrow).first if params[:present]
+    if params[:present]
+      @present_reservation = \
+        Reservation.where('arrival <= ? AND departure >= ?',
+                          Date.today,
+                          Date.tomorrow)
+          .first
+    end
+
     @reservations = if params[:past]
                       Reservation.past
                     elsif params[:future]
@@ -20,23 +27,38 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new reservation_params
 
     if @reservation.save
-      flash[:success] = "New reservation successfully created"
+      flash[:success] = 'New reservation successfully created'
       redirect_to reservations_path(future: true) and return
     else
-      flash.now[:error] = @reservation.errors.full_messages.join(", ")
+      flash.now[:error] = @reservation.errors.full_messages.join(', ')
       render :new and return
     end
   end
 
   def destroy
     Reservation.find(params[:id]).destroy
-    redirect_to :back, flash: { success: "Reservation successfully deleted" } and return
+    redirect_to :back,
+                flash: { success: 'Reservation successfully deleted' }
   end
 
   private
 
-    def reservation_params
-      params.require(:reservation).permit(:arrival, :departure, :adults, :children, :bedclothes_service, visitor_attributes: [:firstname, :lastname, :street, :zip, :city, :country, :mobile, :phone, :email])
-    end
+  def reservation_params
+    params.require(:reservation).permit \
+      :arrival,
+      :departure,
+      :adults,
+      :children,
+      :bedclothes_service,
+      visitor_attributes: [:firstname,
+                           :lastname,
+                           :street,
+                           :zip,
+                           :city,
+                           :country,
+                           :mobile,
+                           :phone,
+                           :email]
+  end
 
 end
