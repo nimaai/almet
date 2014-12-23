@@ -35,8 +35,9 @@ class Reservation < ActiveRecord::Base
           Date.tomorrow)
       .first
   }
-  
-  scope :present_and_future, -> { where("departure >= ?", Date.tomorrow).order("departure ASC") }
+
+  scope :present_and_future,
+        -> { where('departure >= ?', Date.tomorrow).order('departure ASC') }
 
   after_initialize do
     if new_record?
@@ -64,8 +65,16 @@ class Reservation < ActiveRecord::Base
     (start_date..departure - 1).to_a
   end
 
-  def Reservation.reserved_dates_from_today(exclude_arrival_dates = false)
-    Reservation.present_and_future.flat_map {|r| r.present? ? r.reserved_dates(from_today: true) : r.reserved_dates(exclude_arrival: exclude_arrival_dates) }
+  def self.reserved_dates_from_today(exclude_arrival_dates = false)
+    Reservation
+      .present_and_future
+      .flat_map do |r|
+        if r.present?
+          r.reserved_dates(from_today: true)
+        else
+          r.reserved_dates(exclude_arrival: exclude_arrival_dates)
+        end
+      end
   end
 
 end

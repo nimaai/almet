@@ -324,7 +324,10 @@ class ReservationTest < ActiveSupport::TestCase
     assert_not r.visitor.persisted?
   end
 
-  test "list of reserved dates" do
-    assert_equal Reservation.reserved_dates_from_today, Reservation.present.reserved_dates + Reservation.future.flat_map(&:reserved_dates)
+  test 'list of reserved dates' do
+    assert_equal \
+      Reservation.reserved_dates_from_today,
+      Reservation.present.reserved_dates \
+        + Reservation.future.flat_map(&:reserved_dates)
   end
 end
