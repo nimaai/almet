@@ -83,10 +83,24 @@
 :coffeescript
 
   jQuery ->
-    $("#reservation_arrival, #reservation_departure").datepicker
+    $("#reservation_arrival").datepicker
       dateFormat: "dd.mm.yy"
       beforeShowDay: do ->
         reservedDays = #{Reservation.reserved_dates_from_today.to_json}
         (date) ->
-          ymd = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate()
-          if $.inArray(ymd, reservedDays) < 0 then [true, ""] else [false, ""]
+          ymd = date.toISOString().split("T")[0]
+          if $.inArray(ymd, reservedDays) < 0
+            [true, ""]
+          else
+            [false, ""]
+
+    $("#reservation_departure").datepicker
+      dateFormat: "dd.mm.yy"
+      beforeShowDay: do ->
+        reservedDays = #{Reservation.reserved_dates_from_today(exclude_arrival_dates: true).to_json}
+        (date) ->
+          ymd = date.toISOString().split("T")[0]
+          if $.inArray(ymd, reservedDays) < 0
+            [true, ""]
+          else
+            [false, ""]
