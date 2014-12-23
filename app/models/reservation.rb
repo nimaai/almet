@@ -65,7 +65,7 @@ class Reservation < ActiveRecord::Base
     (start_date..departure - 1).to_a
   end
 
-  def self.reserved_dates_from_today(exclude_arrival_dates = false)
+  def self.reserved_dates_from_today(exclude_arrival_dates: false)
     Reservation
       .present_and_future
       .flat_map do |r|
