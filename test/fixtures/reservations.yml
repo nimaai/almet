@@ -10,13 +10,13 @@ reservation2:
   departure:    <%= Date.today + 14.days %>
   adults:       <%= rand(1..2) %>
   bedclothes_service: <%= [true, false].sample %>
-  visitor:      user1
+  visitor:      user2
 
 reservation3:
   arrival:      <%= Date.today + 17.days %>
   departure:    <%= Date.today + 18.days %>
   bedclothes_service: <%= [true, false].sample %>
-  visitor:      user1
+  visitor:      user3
 
 reservation4:
   arrival:      <%= Date.today + 19.days %>
@@ -24,7 +24,7 @@ reservation4:
   adults:       <%= rand(1..2) %>
   children:     <%= rand(0..2) %>
   bedclothes_service: <%= [true, false].sample %>
-  visitor:      user1
+  visitor:      user4
 
 reservation5:
   arrival:      <%= Date.today + 20.days %>
@@ -40,7 +40,7 @@ reservation6:
   adults:       <%= rand(1..2) %>
   children:     <%= rand(0..2) %>
   bedclothes_service: <%= [true, false].sample %>
-  visitor:      user1
+  visitor:      user2
 
 reservation7:
   arrival:      <%= Date.today - 6.days %>
@@ -56,7 +56,7 @@ reservation8:
   adults:       <%= rand(1..2) %>
   children:     <%= rand(0..2) %>
   bedclothes_service: <%= [true, false].sample %>
-  visitor:      user1
+  visitor:      user3
 
 reservation9:
   arrival:      <%= Date.today %>
@@ -64,4 +64,4 @@ reservation9:
   adults:       <%= rand(1..2) %>
   children:     <%= rand(0..2) %>
   bedclothes_service: <%= [true, false].sample %>
-  visitor:      user1
+  visitor:      user4

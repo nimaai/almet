@@ -1,10 +1,14 @@
-user1:
-  firstname:    "User1"
-  lastname:     "Lastname1"
-  street:       "Street1 13"
-  zip:          "Zip1"
-  city:         "City1"
-  country:      "Country1"
-  mobile:       "0904123456"
-  phone:        "0411234567"
-  email:        "user1@email.com"
+<% 20.times do |i| %>
+
+  user<%= i %>:
+    firstname:    <%= Faker::Name.first_name %>
+    lastname:     <%= Faker::Name.last_name %>
+    street:       <%= Faker::Address.street_name %>
+    zip:          <%= Faker::Address.zip %>
+    city:         <%= Faker::Address.city %>
+    country:      <%= Faker::Address.country %>
+    mobile:       <%= Faker::PhoneNumber.cell_phone %>
+    phone:        <%= Faker::PhoneNumber.phone_number %>
+    email:        <%= Faker::Internet.email %>
+
+<% end %>

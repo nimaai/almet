@@ -6,6 +6,7 @@ gem 'better_errors', group: :development
 gem 'binding_of_caller', group: :development
 gem 'coffee-rails'
 gem 'country_select'
+gem 'faker', group: [:development, :test]
 gem 'haml'
 # gem 'jbuilder'
 gem 'jquery-rails'
