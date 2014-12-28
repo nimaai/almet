@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2'
 
 gem 'better_errors', group: :development
 gem 'binding_of_caller', group: :development
