@@ -15,7 +15,6 @@ gem 'pry', group: [:development, :test]
 gem 'pry-rails', group: [:development, :test]
 gem 'rubocop'
 gem 'sass-rails'
-gem 'slim', '~> 2.0.2'
 gem 'sqlite3'
 gem 'turbolinks'
 # gem 'uglifier'

@@ -1,0 +1,9 @@
+%tr{class: "#{'success' if reservation.present?}"}
+  %td= if defined? reservation_counter then reservation_counter + 1 else 1 end
+  %td= l reservation.arrival
+  %td= l reservation.departure
+  %td= reservation.adults
+  %td= reservation.children
+  %td= (reservation.bedclothes_service ? "Yes" : "No")
+  %td= reservation.visitor.fullname
+  %td= link_to "Delete", reservation, method: :delete, role: "button", class: "btn btn-xs btn-danger"
