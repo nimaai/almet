@@ -32,7 +32,8 @@ class ReservationTest < ActiveSupport::TestCase
 
   test 'creation of only a new reservation' do
 
-    @visitor_attrs[:email] = 'user1@email.com'
+    visitor = Visitor.order("RANDOM()").first
+    @visitor_attrs[:email] = visitor.email
 
     r = \
       Reservation.new \
