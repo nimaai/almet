@@ -4,6 +4,7 @@ notifications:
 rvm:
   - 2.1.5
 cache: bundler
+bundler_args: --system --without development
 script:
   - bundle exec rake test
   - bundle exec rubocop -R
