@@ -16,6 +16,14 @@ class ReservationsControllerTest < ActionController::TestCase
                        email:        'new_user@email.com' }
   end
 
+  test 'root_path' do
+    assert_recognizes({ controller: 'reservations',
+                        action: 'index',
+                        present: true,
+                        future: true },
+                      root_path)
+  end
+
   test 'new should initialize reservation and visitor' do
     get :new
     r = assigns(:reservation)
