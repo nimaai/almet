@@ -3,8 +3,9 @@ notifications:
   email: false
 rvm:
   - 2.1.5
+install:
+  - bundle install
 cache: bundler
-bundler_args: --path=~/bundle
 script:
   - bundle exec rake test
   - bundle exec rubocop -R
