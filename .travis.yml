@@ -1,8 +1,8 @@
 language: ruby
-rvm:
-  - 2.2.0
-cache: bundler
 notifications:
   email: false
+rvm:
+  - 2.1.5
+cache: bundler
 script:
   - bundle exec rubocop -R
