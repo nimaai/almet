@@ -24,6 +24,15 @@ class ReservationsControllerTest < ActionController::TestCase
                       root_path)
   end
 
+  test 'show reservation details' do
+    reservation = Reservation.order('RANDOM()').first
+    get :show, id: reservation.id
+    r = assigns(:reservation)
+    assert_equal r.id, reservation.id
+    assert r.visitor
+    assert_template :show
+  end
+
   test 'new should initialize reservation and visitor' do
     get :new
     r = assigns(:reservation)
@@ -101,6 +110,8 @@ class ReservationsControllerTest < ActionController::TestCase
 
       assert_select 'tr td:nth-child(7)', present_reservation.visitor.fullname
       assert_select 'tr td:nth-child(8)' do
+        assert_select "a[href='#{reservation_path(present_reservation.id)}']",
+                      'Show'
         assert_select "a[href='#{reservation_path(present_reservation.id)}']",
                       'Delete'
       end

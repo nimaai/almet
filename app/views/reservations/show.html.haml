@@ -1,0 +1,83 @@
+%h3.text-primary
+  Reservation
+
+.row.voffset4
+  .col-lg-3
+    = label_tag :arrival
+    %div
+      = l @reservation.arrival
+  .col-lg-3
+    = label_tag :departure
+    %div
+      = l @reservation.departure
+  .col-lg-1
+    = label_tag :adults
+    %div
+      = @reservation.adults
+  .col-lg-1
+    = label_tag :children
+    %div
+      = @reservation.children
+  .col-lg-2
+    = label_tag :bedclothes_service
+    %div
+      = @reservation.bedclothes_service
+
+%h3.text-primary.voffset6
+  Visitor
+
+.row.form-inline.voffset4
+
+  .col-lg-3.form-group
+    = label_tag :firstname
+    %div
+      = @reservation.visitor.firstname
+
+  .col-lg-3.form-group
+    = label_tag :lastname
+    %div
+      = @reservation.visitor.lastname
+
+.row.form-inline.voffset4
+
+  .col-lg-3.form-group
+    = label_tag :street
+    %div
+      = @reservation.visitor.street
+
+  .col-lg-3.form-group
+    = label_tag :zip
+    %div
+      = @reservation.visitor.zip
+
+  .col-lg-3.form-group
+    = label_tag :city
+    %div
+      = @reservation.visitor.city
+
+  .col-lg-3.form-group
+    = label_tag :country
+    %div
+      = @reservation.visitor.country
+
+.row.form-inline.voffset4
+
+  .col-lg-3.form-group
+    = label_tag :mobile
+    %div
+      = @reservation.visitor.mobile
+
+  .col-lg-3.form-group
+    = label_tag :phone
+    %div
+      = @reservation.visitor.phone
+
+  .col-lg-3.form-group
+    = label_tag :email
+    %div
+      = @reservation.visitor.email
+
+.row.form-inline.voffset4
+  .col-lg-3
+    = link_to "Edit", { controller: 'reservations', action: 'edit', id: @reservation }, role: "button", class: "btn btn-s btn-info"
+    = link_to "Delete", @reservation, method: :delete, role: "button", class: "btn btn-s btn-danger"

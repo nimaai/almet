@@ -6,4 +6,6 @@
   %td= reservation.children
   %td= (reservation.bedclothes_service ? "Yes" : "No")
   %td= reservation.visitor.fullname
-  %td= link_to "Delete", reservation, method: :delete, role: "button", class: "btn btn-xs btn-danger"
+  %td
+    = link_to "Show", reservation, role: "button", class: "btn btn-xs btn-info"
+    = link_to "Delete", reservation, method: :delete, role: "button", class: "btn btn-xs btn-danger"
