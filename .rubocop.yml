@@ -35,7 +35,7 @@ Metrics/AbcSize:
 
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
-  Max: 239
+  Max: 160
 
 Metrics/CyclomaticComplexity:
   Max: 10

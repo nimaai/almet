@@ -21,7 +21,7 @@
   .col-lg-2
     = label_tag :bedclothes_service
     %div
-      = @reservation.bedclothes_service
+      = @reservation.bedclothes_service ? 'Yes' : 'No'
 
 %h3.text-primary.voffset6
   Visitor
@@ -79,5 +79,6 @@
 
 .row.form-inline.voffset4
   .col-lg-3
-    = link_to "Edit", { controller: 'reservations', action: 'edit', id: @reservation }, role: "button", class: "btn btn-s btn-info"
+    = link_to "Edit", { controller: 'reservations', action: 'edit', id: @reservation }, role: "button", class: "btn btn-s btn-primary"
+    = link_to "Cancel", { controller: 'reservations', action: 'index', present: true, future: true }, role: "button", class: "btn btn-s btn-default"
     = link_to "Delete", @reservation, method: :delete, role: "button", class: "btn btn-s btn-danger"

@@ -9,10 +9,12 @@ class Reservation < ActiveRecord::Base
         Visitor.exists? email: attributes[:email]
       end)
 
-  validates_presence_of :arrival, :departure, :adults, :bedclothes_service
+  validates_presence_of :arrival, :departure, :adults
+  validates_inclusion_of :bedclothes_service, in: [true, false]
 
   validate do
-    if cr = Reservation.find { |r| conflicts? r }
+    # TODO: check only future reservations?
+    if cr = Reservation.find { |r| r != self and conflicts? r }
       errors.add \
         :base,
         %(Requested reservation conflicts with another reservation \

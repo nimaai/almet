@@ -30,7 +30,10 @@ class CreateReservationFlowTest < ActionDispatch::IntegrationTest
           @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
     assert_select '.alert-success'
-    assert_select 'table tbody tr', Reservation.future.count
+
+    index_reservations = Reservation.future.count
+    index_reservations += 1 if Reservation.present
+    assert_select 'table tbody tr', index_reservations
   end
 
 end

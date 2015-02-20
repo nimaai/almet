@@ -48,7 +48,7 @@ class ReservationsControllerTest < ActionController::TestCase
              @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
 
-    assert_redirected_to reservations_path(future: true)
+    assert_redirected_to reservations_path(present: true, future: true)
     assert_not_nil flash[:success]
 
   end

@@ -32,10 +32,25 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       flash[:success] = 'New reservation successfully created'
-      redirect_to reservations_path(future: true) and return
+      redirect_to reservations_path(present: true, future: true)
     else
       flash.now[:error] = @reservation.errors.full_messages.join(', ')
       render :new and return
+    end
+  end
+
+  def edit
+    @reservation = Reservation.find(params[:id])
+  end
+
+  def update
+    @reservation = Reservation.find(params[:id])
+
+    if @reservation.update_attributes(reservation_params)
+      redirect_to action: :index, present: true, future: true
+    else
+      flash.now[:error] = @reservation.errors.full_messages.join(', ')
+      render :edit and return
     end
   end
 
@@ -64,5 +79,4 @@ class ReservationsController < ApplicationController
                            :phone,
                            :email]
   end
-
 end
