@@ -6,6 +6,9 @@ rvm:
 install:
   - bundle install
 cache: bundler
+before_script:
+  - psql -c 'create database almet_test;' -U postgres
+  - cp config/database_example.yml config/database.yml
 script:
   - bundle exec rake test
   - bundle exec rubocop -R

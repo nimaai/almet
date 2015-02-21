@@ -1,0 +1,19 @@
+pg: &pg
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  username: postgres
+  host: localhost
+  password: postgres
+  pool: 5
+
+default: &default
+  <<: *pg
+
+development:
+  <<: *default
+  database: almet_dev
+
+test:
+  <<: *default
+  database: almet_test

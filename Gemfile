@@ -11,6 +11,7 @@ gem 'haml'
 # gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
+gem 'pg', '~> 0.18.1'
 gem 'pry', group: [:development, :test]
 gem 'pry-rails', group: [:development, :test]
 gem 'rubocop'
