@@ -1,0 +1,10 @@
+%tr
+  %td= if defined? visitor_counter then visitor_counter + 1 else 1 end
+  %td= visitor.firstname
+  %td= visitor.lastname
+  %td= visitor.city
+  %td= visitor.country
+  %td= visitor.reservations.count
+  %td
+    = link_to "Show", visitor, role: "button", class: "btn btn-xs btn-info"
+    = link_to "Delete", visitor, method: :delete, role: "button", class: "btn btn-xs btn-danger"

@@ -1,0 +1,10 @@
+- title = "Visitors"
+
+%h3.text-primary= title
+
+%table#visitors.table
+
+  = render "table_header"
+
+  %tbody
+    = render partial: "visitor_line", collection: @visitors, as: :visitor
