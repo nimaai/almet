@@ -19,7 +19,6 @@ class ReservationsControllerTest < ActionController::TestCase
   test 'root_path' do
     assert_recognizes({ controller: 'reservations',
                         action: 'index',
-                        present: true,
                         future: true },
                       root_path)
   end
@@ -48,7 +47,7 @@ class ReservationsControllerTest < ActionController::TestCase
              @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
     end
 
-    assert_redirected_to reservations_path(present: true, future: true)
+    assert_redirected_to reservations_path(future: true)
     assert_not_nil flash[:success]
 
   end
@@ -66,7 +65,7 @@ class ReservationsControllerTest < ActionController::TestCase
 
   test 'should get index of future and present reservations' do
 
-    get :index, future: true, present: true
+    get :index, future: 'true'
 
     assert_response :success
     assert_not_nil assigns(:present_reservation)
@@ -143,7 +142,7 @@ class ReservationsControllerTest < ActionController::TestCase
   end
 
   test 'past reservations' do
-    get :index, past: true
+    get :index, past: 'true'
     assert_template :index
     assert_select 'table tbody tr', Reservation.past.count
     assert_select 'h3', 'Past reservations'

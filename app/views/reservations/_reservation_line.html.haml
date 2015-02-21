@@ -8,4 +8,5 @@
   %td= reservation.visitor.fullname
   %td
     = link_to "Show", reservation, role: "button", class: "btn btn-xs btn-info"
+    -# TODO: disable delete button for past reservations ?
     = link_to "Delete", reservation, method: :delete, role: "button", class: "btn btn-xs btn-danger"

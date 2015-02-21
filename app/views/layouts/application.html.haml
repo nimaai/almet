@@ -20,7 +20,7 @@
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li.dropdown
-              %a.dropdown-toggle{:"data-hover" => "dropdown", :href => reservations_path(present: true, future: true)}
+              %a.dropdown-toggle{:"data-hover" => "dropdown", :href => reservations_path(future: true)}
                 Reservations
                 %b.caret
               %ul.dropdown-menu{role: "menu"}

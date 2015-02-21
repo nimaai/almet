@@ -31,13 +31,6 @@ class Reservation < ActiveRecord::Base
   scope :past, -> { where('departure <= ?', Date.today).order('departure DESC') }
   scope :future, -> { where('arrival >= ?', Date.tomorrow).order('arrival ASC') }
 
-  scope :present, lambda {
-    where('arrival <= ? AND departure >= ?',
-          Date.today,
-          Date.tomorrow)
-      .first
-  }
-
   after_initialize do
     if new_record?
       self.arrival ||= Date.today
@@ -49,8 +42,13 @@ class Reservation < ActiveRecord::Base
     departure > other.arrival and arrival < other.departure
   end
 
+  def self.present
+    find_by('arrival <= ? AND departure >= ?',
+            Date.today,
+            Date.tomorrow)
+  end
+
   def present?
     self == Reservation.present
   end
-
 end

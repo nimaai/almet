@@ -54,7 +54,7 @@ Almet::Application.routes.draw do
   #     resources :products
   #   end
 
-  root 'reservations#index', present: true, future: true
+  root 'reservations#index', future: true
 
   resources :reservations
 end

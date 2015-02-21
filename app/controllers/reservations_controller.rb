@@ -1,21 +1,14 @@
 class ReservationsController < ApplicationController
 
   def index
-    if params[:present]
-      @present_reservation = \
-        Reservation.where('arrival <= ? AND departure >= ?',
-                          Date.today,
-                          Date.tomorrow)
-          .first
+    if params[:past] == 'true'
+      @reservations = Reservation.past
+    elsif params[:future] == 'true'
+      @present_reservation = Reservation.present
+      @reservations = Reservation.future
+    else
+      redirect_to action: :index, future: 'true'
     end
-
-    @reservations = if params[:past]
-                      Reservation.past
-                    elsif params[:future]
-                      Reservation.future
-                    else
-                      Reservation.order(:arrival)
-                    end
   end
 
   def show
@@ -32,7 +25,7 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       flash[:success] = 'New reservation successfully created'
-      redirect_to reservations_path(present: true, future: true)
+      redirect_to reservations_path(future: true)
     else
       flash.now[:error] = @reservation.errors.full_messages.join(', ')
       render :new and return
@@ -47,7 +40,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
 
     if @reservation.update_attributes(reservation_params)
-      redirect_to action: :index, present: true, future: true
+      redirect_to action: :index, future: true
     else
       flash.now[:error] = @reservation.errors.full_messages.join(', ')
       render :edit and return
@@ -57,7 +50,7 @@ class ReservationsController < ApplicationController
   def destroy
     Reservation.find(params[:id]).destroy
     flash[:success] = 'Reservation successfully deleted'
-    redirect_to action: :index, present: true, future: true
+    redirect_to action: :index, future: 'true'
   end
 
   private
