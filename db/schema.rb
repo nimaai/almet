@@ -11,31 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223160925) do
+ActiveRecord::Schema.define(version: 20150222103040) do
 
-  create_table "reservations", force: true do |t|
-    t.date     "arrival"
-    t.date     "departure"
-    t.integer  "adults",             default: 1
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "reservations", force: :cascade do |t|
+    t.date     "arrival",                              null: false
+    t.date     "departure",                            null: false
+    t.integer  "adults",             default: 1,       null: false
     t.integer  "visitor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "children",           default: 0
-    t.boolean  "bedclothes_service", default: true
+    t.datetime "created_at",         default: "now()", null: false
+    t.datetime "updated_at",         default: "now()", null: false
+    t.integer  "children",           default: 0,       null: false
+    t.boolean  "bedclothes_service", default: true,    null: false
   end
 
-  create_table "visitors", force: true do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "street"
-    t.string   "zip"
-    t.string   "city"
-    t.string   "country"
+  create_table "visitors", force: :cascade do |t|
+    t.string   "firstname",                    null: false
+    t.string   "lastname",                     null: false
+    t.string   "street",                       null: false
+    t.string   "zip",                          null: false
+    t.string   "city",                         null: false
+    t.string   "country",                      null: false
     t.string   "phone"
     t.string   "mobile"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "email",                        null: false
+    t.datetime "created_at", default: "now()", null: false
+    t.datetime "updated_at", default: "now()", null: false
   end
 
+  add_foreign_key "reservations", "visitors"
 end
