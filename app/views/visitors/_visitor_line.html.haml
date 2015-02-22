@@ -4,7 +4,8 @@
   %td= visitor.lastname
   %td= visitor.city
   %td= visitor.country
-  %td= visitor.reservations.count
+  %td
+    = link_to visitor.reservations.count, |
+              { controller: :reservations, action: :index, visitor_id: visitor.id }
   %td
     = link_to "Show", visitor, role: "button", class: "btn btn-xs btn-info"
-    = link_to "Delete", visitor, method: :delete, role: "button", class: "btn btn-xs btn-danger"

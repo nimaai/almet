@@ -29,59 +29,8 @@
         .input-group
           = reservation_form.check_box :bedclothes_service, {}, 'true', 'false'
 
-    %h3.text-primary.voffset6
-      Visitor
-
-    .row.form-inline.voffset4
-
-      .col-lg-3.form-group
-        = label_tag :firstname
-        %div
-          = @reservation.visitor.firstname
-
-      .col-lg-3.form-group
-        = label_tag :lastname
-        %div
-          = @reservation.visitor.lastname
-
-    .row.form-inline.voffset4
-
-      .col-lg-3.form-group
-        = label_tag :street
-        %div
-          = @reservation.visitor.street
-
-      .col-lg-3.form-group
-        = label_tag :zip
-        %div
-          = @reservation.visitor.zip
-
-      .col-lg-3.form-group
-        = label_tag :city
-        %div
-          = @reservation.visitor.city
-
-      .col-lg-3.form-group
-        = label_tag :country
-        %div
-          = @reservation.visitor.country
-
-    .row.form-inline.voffset4
-
-      .col-lg-3.form-group
-        = label_tag :mobile
-        %div
-          = @reservation.visitor.mobile
-
-      .col-lg-3.form-group
-        = label_tag :phone
-        %div
-          = @reservation.visitor.phone
-
-      .col-lg-3.form-group
-        = label_tag :email
-        %div
-          = @reservation.visitor.email
+  .voffset5
+    = render partial: 'shared/visitor', object: @reservation.visitor, as: :visitor
 
   .form-inline
 

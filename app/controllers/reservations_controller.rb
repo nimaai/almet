@@ -1,11 +1,18 @@
 class ReservationsController < ApplicationController
 
   def index
+    # TODO: refactor!
     if params[:past] == 'true'
       @reservations = Reservation.past
+      @title = 'Past reservations'
     elsif params[:future] == 'true'
       @present_reservation = Reservation.present
       @reservations = Reservation.future
+      @title = 'Future reservations'
+    elsif params[:visitor_id]
+      visitor = Visitor.find(params[:visitor_id])
+      @reservations = Reservation.where(visitor_id: visitor.id)
+      @title = "Reservations for #{visitor.fullname}"
     else
       redirect_to action: :index, future: 'true'
     end

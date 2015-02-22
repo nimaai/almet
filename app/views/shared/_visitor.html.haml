@@ -1,0 +1,59 @@
+%h3.text-primary
+  Visitor
+
+.row.form-inline.voffset4
+
+  .col-lg-3.form-group
+    = label_tag :firstname
+    %div
+      = visitor.firstname
+
+  .col-lg-3.form-group
+    = label_tag :lastname
+    %div
+      = visitor.lastname
+
+  .col-lg-3.form-group
+    = label_tag :reservations
+    %div
+      = link_to visitor.reservations.count, |
+                { controller: :reservations, action: :index, visitor_id: visitor.id }
+
+.row.form-inline.voffset4
+
+  .col-lg-3.form-group
+    = label_tag :street
+    %div
+      = visitor.street
+
+  .col-lg-3.form-group
+    = label_tag :zip
+    %div
+      = visitor.zip
+
+  .col-lg-3.form-group
+    = label_tag :city
+    %div
+      = visitor.city
+
+  .col-lg-3.form-group
+    = label_tag :country
+    %div
+      = visitor.country
+
+.row.form-inline.voffset4
+
+  .col-lg-3.form-group
+    = label_tag :mobile
+    %div
+      = visitor.mobile
+
+  .col-lg-3.form-group
+    = label_tag :phone
+    %div
+      = visitor.phone
+
+  .col-lg-3.form-group
+    = label_tag :email
+    %div
+      = visitor.email
