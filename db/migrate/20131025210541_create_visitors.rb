@@ -1,7 +1,6 @@
 class CreateVisitors < ActiveRecord::Migration
   def change
     create_table :visitors do |t|
-      # TODO: not null constraints
       t.string :firstname, null: false
       t.string :lastname, null: false
       t.string :street, null: false

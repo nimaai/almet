@@ -22,5 +22,7 @@ module Almet
 
     # add bower components to assets' path
     config.sass.load_paths << File.expand_path('vendor/assets/components/')
+
+    config.active_record.schema_format = :sql
   end
 end
