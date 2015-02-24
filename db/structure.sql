@@ -180,11 +180,11 @@ CREATE CONSTRAINT TRIGGER trigger_existence_of_reservations AFTER INSERT OR UPDA
 
 
 --
--- Name: fk_rails_5824b60d0c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_4c31fbdee0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY reservations
-    ADD CONSTRAINT fk_rails_5824b60d0c FOREIGN KEY (visitor_id) REFERENCES visitors(id);
+    ADD CONSTRAINT fk_rails_4c31fbdee0 FOREIGN KEY (visitor_id) REFERENCES visitors(id);
 
 
 --

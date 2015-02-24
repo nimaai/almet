@@ -1,6 +1,6 @@
-<% 20.times do |i| %>
+<% 4.times do |i| %>
 
-  user<%= i %>:
+  user<%= i + 1 %>:
     firstname:    <%= Faker::Name.first_name %>
     lastname:     <%= Faker::Name.last_name %>
     street:       <%= Faker::Address.street_name %>
