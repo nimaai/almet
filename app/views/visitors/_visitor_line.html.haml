@@ -8,4 +8,8 @@
     = link_to visitor.reservations.count, |
               { controller: :reservations, action: :index, visitor_id: visitor.id }
   %td
+    = link_to "New reservation", |
+              { controller: :reservations, action: :new, visitor_id: visitor.id }, |
+              role: "button", |
+              class: "btn btn-xs btn-primary"
     = link_to "Show", visitor, role: "button", class: "btn btn-xs btn-info"

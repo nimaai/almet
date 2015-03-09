@@ -1,4 +1,4 @@
-= form_for @reservation, url: reservations_path, html: {role: "form"} do |reservation_form|
+= form_tag reservations_path, html: {role: 'form'} do
 
   .form-inline
 
@@ -7,27 +7,44 @@
 
     .row.voffset4
       .col-lg-3.form-group
-        = reservation_form.label :arrival, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y", :"data-min" => @reservation.arrival, :"data-name" => "reservation[arrival]"}
+        = label_tag 'reservation_arrival', 'Arrival', class: 'control-label'
+        .bfh-datepicker{:id => 'reservation_arrival', |
+                        :'data-format' => 'd.m.y', |
+                        :'data-min' => l(@reservation.arrival), |
+                        :'data-name' => 'reservation[arrival]'}
 
       .col-lg-3.form-group
-        = reservation_form.label :departure, class: "control-label"
-        .bfh-datepicker{:"data-format" => "d.m.y", :"data-date" => l(@reservation.departure), :"data-name" => "reservation[departure]"}
+        = label_tag 'reservation_departure', 'Departure', class: 'control-label'
+        .bfh-datepicker{:id => 'reservation_departure', |
+                        :'data-format' => 'd.m.y', |
+                        :'data-date' => l(@reservation.departure), |
+                        :'data-name' => 'reservation[departure]'}
 
       .col-lg-1.form-group
-        = reservation_form.label :adults, "Adults", class: "control-label"
-        = reservation_form.select :adults, 1..9, value: @reservation.adults, class: "form-control"
+        = label_tag 'reservation_adults', 'Adults', class: 'control-label'
+        = select_tag 'reservation[adults]', |
+                     options_for_select(1..9, @reservation.adults), |
+                     class: 'form-control'
 
       .col-lg-1.form-group
-        = reservation_form.label :children, "Children", class: "control-label"
-        = reservation_form.select :children, 0..9, value: @reservation.children, class: "form-control"
+        = label_tag 'reservation_children', 'Children', class: 'control-label'
+        = select_tag 'reservation[children]', |
+                     options_for_select(0..9, @reservation.children), |
+                     class: 'form-control'
 
       .col-lg-2.form-group
-        = reservation_form.label :bedroom_service, "Bedclothes service", class: "control-label"
+        = label_tag 'reservation_bedclothes_service', 'Bedclothes service', class: 'control-label'
         .input-group
-          = reservation_form.check_box :bedroom_service, checked: @reservation.bedclothes_service
+          = check_box_tag 'reservation[bedclothes_service]', |
+                          true, |
+                          @reservation.bedclothes_service
 
-  = reservation_form.fields_for :visitor_attributes do |visitor_fields|
+  - unless @reservation.visitor.new_record?
+
+    .voffset5
+      = render partial: 'shared/visitor', object: @reservation.visitor, as: :visitor
+
+  - else
 
     %h3.text-primary.voffset6
       Visitor
@@ -35,48 +52,69 @@
     .row.form-inline.voffset4
 
       .col-lg-3.form-group
-        = visitor_fields.label :firstname, class: "control-label"
-        = visitor_fields.text_field :firstname, class: "form-control", value: @reservation.visitor.firstname
+        = label_tag 'visitor_firstname', 'Firstname', class: 'control-label'
+        = text_field_tag 'visitor[firstname]', |
+                         @reservation.visitor.firstname, |
+                         class: 'form-control'
 
       .col-lg-3.form-group
-        = visitor_fields.label :lastname, class: "control-label"
-        = visitor_fields.text_field :lastname, class: "form-control", value: @reservation.visitor.lastname
+        = label_tag 'visitor_lastname', 'Lastname', class: 'control-label'
+        = text_field_tag 'visitor[lastname]', |
+                         @reservation.visitor.lastname, |
+                         class: 'form-control'
 
     .row.form-inline.voffset4
 
       .col-lg-3.form-group
-        = visitor_fields.label :street, class: "control-label"
-        = visitor_fields.text_field :street, class: "form-control", value: @reservation.visitor.street
+        = label_tag 'visitor_street', 'Street', class: 'control-label'
+        = text_field_tag 'visitor[street]', |
+                         @reservation.visitor.street, |
+                         class: 'form-control'
 
       .col-lg-3.form-group
-        = visitor_fields.label :zip, class: "control-label"
-        = visitor_fields.text_field :zip, class: "form-control", value: @reservation.visitor.zip
+        = label_tag 'visitor_zip', 'Postal code', class: 'control-label'
+        = text_field_tag 'visitor[zip]', |
+                         @reservation.visitor.zip, |
+                         class: 'form-control'
 
       .col-lg-3.form-group
-        = visitor_fields.label :city, class: "control-label"
-        = visitor_fields.text_field :city, class: "form-control", value: @reservation.visitor.city
+        = label_tag 'visitor_city', 'City', class: 'control-label'
+        = text_field_tag 'visitor[city]', |
+                         @reservation.visitor.city, |
+                         class: 'form-control'
 
       .col-lg-3.form-group
-        = visitor_fields.label :country, class: "control-label"
-        - c = @reservation.visitor.country
-        = visitor_fields.country_select :country, class: "form-control", value: @reservation.visitor.country
+        = label_tag 'visitor_country', 'Country', class: 'control-label'
+        = country_select 'visitor', 'country', |
+                         { priority_countries: ['SK'] }, |
+                         { selected: @reservation.visitor.country, |
+                           class: 'form-control' }
 
     .row.form-inline.voffset4
 
       .col-lg-3.form-group
-        = visitor_fields.label :mobile, class: "control-label"
-        = visitor_fields.phone_field :mobile, class: "form-control", value: @reservation.visitor.mobile
+        = label_tag 'visitor_mobile', 'Mobile', class: 'control-label'
+        = phone_field_tag 'visitor[mobile]', |
+                          @reservation.visitor.mobile, |
+                          class: 'form-control'
 
       .col-lg-3.form-group
-        = visitor_fields.label :phone, class: "control-label"
-        = visitor_fields.phone_field :phone, class: "form-control", value: @reservation.visitor.phone
+        = label_tag 'visitor_phone', 'Phone', class: 'control-label'
+        = phone_field_tag 'visitor[phone]', |
+                          @reservation.visitor.phone, |
+                          class: 'form-control'
 
       .col-lg-3.form-group
-        = visitor_fields.label :email, class: "control-label"
-        = visitor_fields.email_field :email, class: "form-control", value: @reservation.visitor.email
+        = label_tag 'visitor_email', 'Email', class: 'control-label'
+        = email_field_tag 'visitor[email]', |
+                          @reservation.visitor.email, |
+                          class: 'form-control'
 
   .form-inline
 
-    .form-group.voffset4
-      = reservation_form.button "Send", class: "btn btn-success"
-      = link_to "Cancel", { controller: 'reservations', action: 'index', future: true }, role: "button", class: "btn btn-s btn-default"
+    .form-group.voffset5
+      = button_tag 'Send', class: 'btn btn-success'
+      = link_to 'Cancel', |
+                { controller: 'reservations', action: 'index', future: true }, |
+                role: 'button', |
+                class: 'btn btn-s btn-default'

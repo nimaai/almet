@@ -24,16 +24,24 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
-    @reservation.visitor = Visitor.new
+    @reservation.visitor = Visitor.find_by_id(params[:visitor_id])
+    @reservation.visitor ||= Visitor.new
   end
 
   def create
-    @reservation = Reservation.new reservation_params
+    @reservation = Reservation.new(reservation_params)
 
-    if @reservation.save
-      flash[:success] = 'New reservation successfully created'
-      redirect_to reservations_path(future: true)
-    else
+    begin
+      ActiveRecord::Base.transaction do
+        @reservation.visitor ||= \
+          Visitor
+            .create_with(visitor_params)
+            .find_or_create_by!(email: visitor_params[:email])
+        @reservation.save!
+        flash[:success] = 'New reservation successfully created'
+        redirect_to reservations_path(future: true)
+      end
+    rescue
       flash.now[:error] = @reservation.errors.full_messages.join(', ')
       render :new and return
     end
@@ -69,14 +77,19 @@ class ReservationsController < ApplicationController
       :adults,
       :children,
       :bedclothes_service,
-      visitor_attributes: [:firstname,
-                           :lastname,
-                           :street,
-                           :zip,
-                           :city,
-                           :country,
-                           :mobile,
-                           :phone,
-                           :email]
+      :visitor_id
+  end
+
+  def visitor_params
+    params.require(:visitor).permit \
+      :firstname,
+      :lastname,
+      :street,
+      :zip,
+      :city,
+      :country,
+      :mobile,
+      :phone,
+      :email
   end
 end

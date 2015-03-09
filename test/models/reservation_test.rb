@@ -19,31 +19,6 @@ class ReservationTest < ActiveSupport::TestCase
                        email:        'new_user@email.com' }
   end
 
-  test 'creation of a new reservation and a new visitor' do
-
-    r = \
-      Reservation.new \
-        @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
-    assert r.save
-    assert r.persisted?
-    assert r.visitor
-
-  end
-
-  test 'creation of only a new reservation' do
-
-    visitor = Visitor.order('RANDOM()').first
-    @visitor_attrs[:email] = visitor.email
-
-    r = \
-      Reservation.new \
-        @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
-    assert r.save
-    assert r.persisted?
-    assert_nil r.visitor
-
-  end
-
   test 'past reservations' do
     assert_equal \
       Reservation.past.count,
@@ -107,9 +82,8 @@ class ReservationTest < ActiveSupport::TestCase
 
   test 'validation of arrival time in the past' do
     @reservation_attrs[:arrival] = Date.yesterday
-    r = \
-      Reservation.new \
-        @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    r = Reservation.new(@reservation_attrs)
+    r.visitor = Visitor.new(@visitor_attrs)
     assert_not r.save
     assert_not r.persisted?
     assert_not r.visitor.persisted?
@@ -117,17 +91,15 @@ class ReservationTest < ActiveSupport::TestCase
 
   test 'validation of departure time being before arrival time' do
     @reservation_attrs[:departure] = Date.today
-    r = \
-      Reservation.new \
-        @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    r = Reservation.new(@reservation_attrs)
+    r.visitor = Visitor.new(@visitor_attrs)
     assert_not r.save
     assert_not r.persisted?
     assert_not r.visitor.persisted?
 
     @reservation_attrs[:departure] = Date.tomorrow
-    r = \
-      Reservation.new \
-        @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
+    r = Reservation.new(@reservation_attrs)
+    r.visitor = Visitor.new(@visitor_attrs)
     assert_not r.save
     assert_not r.persisted?
     assert_not r.visitor.persisted?

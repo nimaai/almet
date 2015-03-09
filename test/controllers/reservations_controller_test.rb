@@ -39,30 +39,6 @@ class ReservationsControllerTest < ActionController::TestCase
     assert r.visitor
   end
 
-  test 'should create reservation' do
-
-    assert_difference 'Reservation.count' do
-      post :create,
-           reservation: \
-             @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
-    end
-
-    assert_redirected_to reservations_path(future: true)
-    assert_not_nil flash[:success]
-
-  end
-
-  test 'validation errors upon creation' do
-    @visitor_attrs[:email] = nil
-    assert_no_difference 'Reservation.count' do
-      post :create,
-           reservation: \
-             @reservation_attrs.merge(visitor_attributes: @visitor_attrs)
-    end
-    assert_template :new
-    assert_not_nil flash[:error]
-  end
-
   test 'should get index of future and present reservations' do
 
     get :index, future: 'true'
@@ -146,6 +122,43 @@ class ReservationsControllerTest < ActionController::TestCase
     assert_template :index
     assert_select 'table tbody tr', Reservation.past.count
     assert_select 'h3', 'Past reservations'
+  end
+
+  test 'creation with a new visitor' do
+    assert_difference 'Reservation.count' do
+      post :create,
+           reservation: @reservation_attrs,
+           visitor: @visitor_attrs
+    end
+
+    assert_redirected_to reservations_path(future: true)
+    assert_not_nil flash[:success]
+  end
+
+  test 'creation with an existing visitor' do
+    visitor = Visitor.order('RANDOM()').first
+    @visitor_attrs[:email] = visitor.email
+
+    assert_difference 'Reservation.count' do
+      post :create,
+           reservation: @reservation_attrs,
+           visitor: @visitor_attrs
+    end
+
+    assert_redirected_to reservations_path(future: true)
+    assert_not_nil flash[:success]
+  end
+
+  test 'creation with an existing visitor using visitor_id' do
+    visitor = Visitor.order('RANDOM()').first
+    @reservation_attrs[:visitor_id] = visitor.id
+
+    assert_difference 'Reservation.count' do
+      post :create, reservation: @reservation_attrs
+    end
+
+    assert_redirected_to reservations_path(future: true)
+    assert_not_nil flash[:success]
   end
 
 end

@@ -59,7 +59,7 @@ CREATE TABLE reservations (
     arrival date NOT NULL,
     departure date NOT NULL,
     adults integer DEFAULT 1 NOT NULL,
-    visitor_id integer,
+    visitor_id integer NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
     updated_at timestamp without time zone DEFAULT now() NOT NULL,
     children integer DEFAULT 0 NOT NULL,
@@ -180,11 +180,11 @@ CREATE CONSTRAINT TRIGGER trigger_existence_of_reservations AFTER INSERT OR UPDA
 
 
 --
--- Name: fk_rails_4c31fbdee0; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_b8a7414b9d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY reservations
-    ADD CONSTRAINT fk_rails_4c31fbdee0 FOREIGN KEY (visitor_id) REFERENCES visitors(id);
+    ADD CONSTRAINT fk_rails_b8a7414b9d FOREIGN KEY (visitor_id) REFERENCES visitors(id);
 
 
 --

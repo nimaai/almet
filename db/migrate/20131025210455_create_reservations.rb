@@ -4,7 +4,7 @@ class CreateReservations < ActiveRecord::Migration
       t.date :arrival, null: false
       t.date :departure, null: false
       t.integer :guests, null: false
-      t.belongs_to :visitor
+      t.belongs_to :visitor, null: false
 
       t.timestamps null: false
     end

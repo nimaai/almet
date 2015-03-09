@@ -1,1 +1,7 @@
 = render partial: 'shared/visitor', object: @visitor, as: :visitor
+
+.voffset4
+  = link_to "New reservation", |
+            { controller: :reservations, action: :new, visitor_id: @visitor.id }, |
+            role: "button", |
+            class: "btn btn-s btn-primary"

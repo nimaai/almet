@@ -28,8 +28,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 4.days,
         departure: Date.today + 6.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     cr = Reservation.find { |cr| r.conflicts? cr }
     assert_not r.save
@@ -44,8 +44,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 5.days,
         departure: Date.today + 6.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -56,8 +56,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 6.days,
         departure: Date.today + 7.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -68,8 +68,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 6.days,
         departure: Date.today + 8.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -80,8 +80,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 6.days,
         departure: Date.today + 9.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -92,8 +92,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 4.days,
         departure: Date.today + 9.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -111,8 +111,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 4.days,
         departure: Date.today + 5.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert r.save
     assert r.persisted?
@@ -129,8 +129,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 8.days,
         departure: Date.today + 9.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert r.save
     assert r.persisted?
@@ -147,8 +147,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 7.days,
         departure: Date.today + 12.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -159,8 +159,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 7.days,
         departure: Date.today + 12.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -171,8 +171,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 7.days,
         departure: Date.today + 12.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -183,8 +183,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 20.days,
         departure: Date.today + 21.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert_not r.save
 
@@ -202,8 +202,8 @@ class ConflictsTest < ActiveSupport::TestCase
         arrival: Date.today + 18.days,
         departure: Date.today + 19.days,
         adults: 1,
-        bedclothes_service: true,
-        visitor_attributes: @visitor_attrs
+        bedclothes_service: true
+    r.visitor = Visitor.new(@visitor_attrs)
 
     assert r.save
     assert r.persisted?

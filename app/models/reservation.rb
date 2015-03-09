@@ -2,13 +2,6 @@ class Reservation < ActiveRecord::Base
 
   belongs_to :visitor
 
-  accepts_nested_attributes_for \
-    :visitor,
-    reject_if: \
-      (proc do |attributes|
-        Visitor.exists? email: attributes[:email]
-      end)
-
   validates_presence_of :arrival, :departure, :adults
   validates_inclusion_of :bedclothes_service, in: [true, false]
 
