@@ -5,3 +5,7 @@
             { controller: :reservations, action: :new, visitor_id: @visitor.id }, |
             role: "button", |
             class: "btn btn-s btn-primary"
+  = link_to "Edit", |
+            { controller: :visitors, action: :edit }, |
+            role: "button", |
+            class: "btn btn-s btn-default"
