@@ -1,0 +1,78 @@
+%h3.text-primary
+  Visitor
+
+= form_tag visitor_path, method: :put, html: {role: 'form'} do
+
+  .row.form-inline.voffset4
+
+    .col-lg-3.form-group
+      = label_tag :firstname
+      = text_field_tag 'firstname', |
+                       @visitor.firstname, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :lastname
+      = text_field_tag 'lastname', |
+                       @visitor.lastname, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :reservations
+      %div= @visitor.reservations.count
+
+  .row.form-inline.voffset4
+
+    .col-lg-3.form-group
+      = label_tag :street
+      = text_field_tag 'street', |
+                       @visitor.street, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :zip
+      = text_field_tag 'zip', |
+                       @visitor.zip, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :city
+      = text_field_tag 'city', |
+                       @visitor.city, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :country
+      = country_select 'visitor', 'country', |
+                       { priority_countries: ['SK'] }, |
+                       { selected: @visitor.country, |
+                         class: 'form-control' }
+
+  .row.form-inline.voffset4
+
+    .col-lg-3.form-group
+      = label_tag :mobile
+      = phone_field_tag 'mobile', |
+                        @visitor.mobile, |
+                        class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :phone
+      %div
+      = phone_field_tag 'phone', |
+                        @visitor.phone, |
+                        class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :email
+      %div
+        = @visitor.email
+
+  .form-inline
+
+    .form-group.voffset5
+      = button_tag 'Send', class: 'btn btn-success'
+      = link_to 'Cancel', |
+                { controller: 'visitors', action: 'show' }, |
+                role: 'button', |
+                class: 'btn btn-s btn-default'
