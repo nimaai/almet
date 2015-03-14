@@ -4,6 +4,7 @@
   %td= visitor.lastname
   %td= visitor.city
   %td= visitor.country
+  %td= visitor.email
   %td
     = link_to visitor.reservations.count, |
               { controller: :reservations, action: :index, visitor_id: visitor.id }
