@@ -19,7 +19,7 @@ class VisitorsControllerTest < ActionController::TestCase
                       phone:        '0411234567' }
 
     visitor = Visitor.all.sample
-    post :update, { id: visitor.id }.merge(visitor_attrs)
+    post :update, { id: visitor.id }.merge(visitor: visitor_attrs)
     assert_redirected_to visitors_path
     assert_not_nil flash[:success]
   end
