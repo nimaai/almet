@@ -1,0 +1,78 @@
+%h3.text-primary
+  Visitor
+
+= form_tag visitor_path, method: :put, html: { role: 'form' } do
+
+  .row.form-inline.voffset4
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_firstname', 'Firstname', class: 'control-label'
+      = text_field_tag 'visitor[firstname]', |
+                       @visitor.firstname, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_lastname', 'Lastname', class: 'control-label'
+      = text_field_tag 'visitor[lastname]', |
+                       @visitor.lastname, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag :'visitor_reservations', 'Reservations', class: 'control-label'
+      %div= @visitor.reservations.count
+
+  .row.form-inline.voffset4
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_street', 'Street', class: 'control-label'
+      = text_field_tag 'visitor[street]', |
+                       @visitor.street, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_zip', 'Zip', class: 'control-label'
+      = text_field_tag 'visitor[zip]', |
+                       @visitor.zip, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_city', 'City', class: 'control-label'
+      = text_field_tag 'visitor[city]', |
+                       @visitor.city, |
+                       class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_country', 'Country', class: 'control-label'
+      = country_select 'visitor', 'country', |
+                       { priority_countries: ['SK'] }, |
+                       { selected: @visitor.country, |
+                         class: 'form-control' }
+
+  .row.form-inline.voffset4
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_mobile', 'Mobile', class: 'control-label'
+      = phone_field_tag 'visitor[mobile]', |
+                        @visitor.mobile, |
+                        class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_phone', 'Phone', class: 'control-label'
+      %div
+        = phone_field_tag 'visitor[phone]', |
+                          @visitor.phone, |
+                          class: 'form-control'
+
+    .col-lg-3.form-group
+      = label_tag 'visitor_email', 'Email', class: 'control-label'
+      %div
+        = @visitor.email
+
+  .form-inline
+
+    .form-group.voffset5
+      = button_tag 'Send', class: 'btn btn-success'
+      = link_to 'Cancel', |
+                { controller: 'visitors', action: 'show' }, |
+                role: 'button', |
+                class: 'btn btn-s btn-default'

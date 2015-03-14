@@ -55,6 +55,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
 
     if @reservation.update_attributes(reservation_params)
+      flash[:success] = 'Reservation updated successfully'
       redirect_to action: :index, future: true
     else
       flash.now[:error] = @reservation.errors.full_messages.join(', ')
